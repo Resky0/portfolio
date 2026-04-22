@@ -21,7 +21,9 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import WorkCard from '../components/WorkCard.vue'
+
 const works = [
   {
     id: 1,
@@ -72,10 +74,6 @@ const works = [
     link: '#'
   }
 ]
-
-useHead({
-  title: '作品集 - 个人网站'
-})
 </script>
 
 <style scoped>

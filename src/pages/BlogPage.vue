@@ -15,13 +15,11 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import { onMounted } from 'vue'
+
 onMounted(() => {
   window.location.href = 'https://blog.csdn.net/m0_54000398?type=blog'
-})
-
-useHead({
-  title: '博客 - Resky'
 })
 </script>
 

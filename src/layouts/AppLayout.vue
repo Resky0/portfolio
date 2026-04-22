@@ -2,16 +2,16 @@
   <div class="layout">
     <header class="header">
       <div class="container header-inner">
-        <NuxtLink to="/" class="logo">
+        <RouterLink to="/" class="logo">
           <span class="logo-icon">⚡</span>
           <span class="gradient-text">Portfolio</span>
-        </NuxtLink>
+        </RouterLink>
         <nav class="nav">
-          <NuxtLink to="/" class="nav-link" :class="{ active: route.path === '/' }">首页</NuxtLink>
-          <NuxtLink to="/works" class="nav-link" :class="{ active: route.path === '/works' }">作品集</NuxtLink>
+          <RouterLink to="/" class="nav-link" :class="{ active: route.path === '/' }">首页</RouterLink>
+          <RouterLink to="/works" class="nav-link" :class="{ active: route.path === '/works' }">作品集</RouterLink>
           <a href="https://blog.csdn.net/m0_54000398?type=blog" class="nav-link" target="_blank" rel="noopener">博客</a>
-          <NuxtLink to="/about" class="nav-link" :class="{ active: route.path === '/about' }">关于</NuxtLink>
-          <NuxtLink to="/contact" class="nav-link" :class="{ active: route.path === '/contact' }">联系</NuxtLink>
+          <RouterLink to="/about" class="nav-link" :class="{ active: route.path === '/about' }">关于</RouterLink>
+          <RouterLink to="/contact" class="nav-link" :class="{ active: route.path === '/contact' }">联系</RouterLink>
         </nav>
         <button class="mobile-menu-btn" @click="mobileMenuOpen = !mobileMenuOpen">
           <span></span>
@@ -20,11 +20,11 @@
         </button>
       </div>
       <div v-if="mobileMenuOpen" class="mobile-menu">
-        <NuxtLink to="/" class="nav-link" @click="mobileMenuOpen = false">首页</NuxtLink>
-        <NuxtLink to="/works" class="nav-link" @click="mobileMenuOpen = false">作品集</NuxtLink>
+        <RouterLink to="/" class="nav-link" @click="mobileMenuOpen = false">首页</RouterLink>
+        <RouterLink to="/works" class="nav-link" @click="mobileMenuOpen = false">作品集</RouterLink>
         <a href="https://blog.csdn.net/m0_54000398?type=blog" class="nav-link" target="_blank" rel="noopener" @click="mobileMenuOpen = false">博客</a>
-        <NuxtLink to="/about" class="nav-link" @click="mobileMenuOpen = false">关于</NuxtLink>
-        <NuxtLink to="/contact" class="nav-link" @click="mobileMenuOpen = false">联系</NuxtLink>
+        <RouterLink to="/about" class="nav-link" @click="mobileMenuOpen = false">关于</RouterLink>
+        <RouterLink to="/contact" class="nav-link" @click="mobileMenuOpen = false">联系</RouterLink>
       </div>
     </header>
     <main class="main">
@@ -48,7 +48,10 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import { ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
+
 const route = useRoute()
 const mobileMenuOpen = ref(false)
 
@@ -99,6 +102,33 @@ watch(() => route.path, () => {
   gap: 2.5rem;
 }
 
+.nav-link {
+  position: relative;
+  color: var(--text-secondary);
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--text-primary);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
 .mobile-menu-btn {
   display: none;
   flex-direction: column;
@@ -106,23 +136,27 @@ watch(() => route.path, () => {
   background: none;
   border: none;
   cursor: pointer;
-  padding: 5px;
+  padding: 8px;
 }
 
 .mobile-menu-btn span {
   width: 24px;
   height: 2px;
   background: var(--text-primary);
+  border-radius: 2px;
   transition: all 0.3s ease;
 }
 
 .mobile-menu {
-  display: flex;
+  display: none;
   flex-direction: column;
-  gap: 1rem;
-  padding: 1rem 2rem 1.5rem;
-  background: var(--bg-dark);
+  padding: 1rem 2rem;
+  background: rgba(15, 23, 42, 0.95);
   border-top: 1px solid rgba(148, 163, 184, 0.1);
+}
+
+.mobile-menu .nav-link {
+  padding: 0.75rem 0;
 }
 
 .main {
@@ -132,8 +166,9 @@ watch(() => route.path, () => {
 
 .footer {
   background: var(--bg-card);
+  border-top: 1px solid rgba(148, 163, 184, 0.1);
   padding: 3rem 0;
-  margin-top: 4rem;
+  margin-top: auto;
 }
 
 .footer-content {
@@ -147,14 +182,14 @@ watch(() => route.path, () => {
   gap: 0.5rem;
   font-size: 1.25rem;
   font-weight: 700;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .footer-links {
   display: flex;
   justify-content: center;
   gap: 2rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .footer-links a {
@@ -177,6 +212,10 @@ watch(() => route.path, () => {
   }
 
   .mobile-menu-btn {
+    display: flex;
+  }
+
+  .mobile-menu {
     display: flex;
   }
 }

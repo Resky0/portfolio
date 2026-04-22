@@ -79,7 +79,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const skillCategories = [
   {
     name: 'Java 核心技术',
@@ -116,10 +116,6 @@ const experiences = [
     description: '从事前端开发工作，负责公司官网和内部系统的开发与维护'
   }
 ]
-
-useHead({
-  title: '关于 - 个人网站'
-})
 </script>
 
 <style scoped>
@@ -149,26 +145,26 @@ useHead({
 
 .image-wrapper {
   position: relative;
+  border-radius: 16px;
+  overflow: hidden;
 }
 
 .image-wrapper img {
   width: 100%;
-  border-radius: 24px;
-  position: relative;
-  z-index: 1;
+  display: block;
 }
 
 .image-decoration {
   position: absolute;
-  inset: -10px;
-  background: linear-gradient(135deg, var(--primary), var(--accent));
-  border-radius: 32px;
-  opacity: 0.3;
-  filter: blur(20px);
+  inset: 0;
+  border: 2px solid var(--primary);
+  border-radius: 16px;
+  transform: translate(12px, 12px);
+  z-index: -1;
 }
 
 .about-title {
-  font-size: 1.75rem;
+  font-size: 2rem;
   font-weight: 700;
   margin-bottom: 1.5rem;
 }
@@ -193,27 +189,26 @@ useHead({
 
 .detail-label {
   color: var(--text-muted);
-  min-width: 60px;
+  min-width: 80px;
 }
 
 .detail-value {
   color: var(--text-primary);
 }
 
-.skills-section {
+.skills-section,
+.experience-section {
   padding: 4rem 0;
-  background: var(--bg-card);
 }
 
 .skills-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
-  margin-top: 3rem;
 }
 
 .skill-category {
-  background: var(--bg-dark);
+  background: var(--bg-card);
   padding: 1.5rem;
   border-radius: 12px;
   border: 1px solid rgba(148, 163, 184, 0.1);
@@ -221,7 +216,7 @@ useHead({
 
 .skill-category-title {
   font-size: 1.125rem;
-  font-weight: 700;
+  font-weight: 600;
   margin-bottom: 1rem;
   color: var(--primary);
 }
@@ -233,27 +228,23 @@ useHead({
 }
 
 .skill-item {
-  padding: 0.5rem 1rem;
+  padding: 0.375rem 0.75rem;
   background: rgba(14, 165, 233, 0.1);
-  color: var(--text-primary);
+  color: var(--text-secondary);
   border-radius: 6px;
   font-size: 0.875rem;
 }
 
-.experience-section {
-  padding: 6rem 0;
-}
-
 .timeline {
-  max-width: 700px;
-  margin: 3rem auto 0;
   position: relative;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .timeline::before {
   content: '';
   position: absolute;
-  left: 8px;
+  left: 0;
   top: 0;
   bottom: 0;
   width: 2px;
@@ -262,8 +253,8 @@ useHead({
 
 .timeline-item {
   position: relative;
-  padding-left: 40px;
-  padding-bottom: 2.5rem;
+  padding-left: 2rem;
+  padding-bottom: 2rem;
 }
 
 .timeline-item:last-child {
@@ -272,14 +263,20 @@ useHead({
 
 .timeline-dot {
   position: absolute;
-  left: 0;
-  top: 4px;
-  width: 18px;
-  height: 18px;
-  background: var(--primary);
+  left: -6px;
+  top: 0;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
+  background: var(--primary);
   border: 3px solid var(--bg-dark);
-  box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.2);
+}
+
+.timeline-content {
+  background: var(--bg-card);
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid rgba(148, 163, 184, 0.1);
 }
 
 .timeline-period {
@@ -296,7 +293,7 @@ useHead({
 
 .timeline-description {
   color: var(--text-secondary);
-  line-height: 1.7;
+  line-height: 1.6;
 }
 
 @media (max-width: 768px) {
@@ -306,12 +303,17 @@ useHead({
   }
 
   .about-image {
-    max-width: 250px;
+    max-width: 300px;
     margin: 0 auto;
   }
 
   .about-details {
     align-items: center;
+  }
+
+  .detail-item {
+    flex-direction: column;
+    gap: 0.25rem;
   }
 }
 </style>

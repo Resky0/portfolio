@@ -13,12 +13,12 @@
             <span class="gradient-text">Resky</span>
           </h1>
           <p class="hero-description">
-            AI 全栈开发工程师，专注于 Java 后端与智能应用开发。热衷于用 Spring AI 
+            AI 全栈开发工程师，专注于 Java 后端与智能应用开发。热衷于用 Spring AI
             构建智能化解决方案，让技术创造实际价值。
           </p>
           <div class="hero-actions">
-            <NuxtLink to="/works" class="btn-primary">查看作品</NuxtLink>
-            <NuxtLink to="/contact" class="btn-secondary">联系我</NuxtLink>
+            <RouterLink to="/works" class="btn-primary">查看作品</RouterLink>
+            <RouterLink to="/contact" class="btn-secondary">联系我</RouterLink>
           </div>
           <div class="hero-stats">
             <div class="stat">
@@ -73,7 +73,7 @@
           />
         </div>
         <div class="view-more">
-          <NuxtLink to="/works" class="btn-secondary">查看全部作品</NuxtLink>
+          <RouterLink to="/works" class="btn-secondary">查看全部作品</RouterLink>
         </div>
       </div>
     </section>
@@ -83,14 +83,16 @@
         <div class="cta-content">
           <h2 class="cta-title">有想法？让我们一起实现</h2>
           <p class="cta-description">无论是新项目合作、技术咨询还是只是想聊聊，都可以联系我</p>
-          <NuxtLink to="/contact" class="btn-primary">开始对话</NuxtLink>
+          <RouterLink to="/contact" class="btn-primary">开始对话</RouterLink>
         </div>
       </div>
     </section>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import WorkCard from '../components/WorkCard.vue'
+
 const featuredWorks = [
   {
     id: 1,
@@ -148,16 +150,14 @@ const featuredWorks = [
   background: var(--primary);
   top: -100px;
   right: -100px;
-  opacity: 0.3;
 }
 
 .hero-orb-2 {
   width: 400px;
   height: 400px;
   background: var(--accent);
-  bottom: -50px;
+  bottom: -100px;
   left: -100px;
-  opacity: 0.2;
 }
 
 .hero-orb-3 {
@@ -167,7 +167,6 @@ const featuredWorks = [
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  opacity: 0.15;
 }
 
 .hero-content {
@@ -190,10 +189,10 @@ const featuredWorks = [
 }
 
 .hero-title {
-  font-size: 3.5rem;
-  font-weight: 800;
-  line-height: 1.1;
+  font-size: 4rem;
+  font-weight: 700;
   margin-bottom: 1.5rem;
+  line-height: 1.1;
 }
 
 .hero-description {
@@ -205,7 +204,7 @@ const featuredWorks = [
 
 .hero-actions {
   display: flex;
-  gap: 2.5rem;
+  gap: 1rem;
   margin-bottom: 3rem;
 }
 
@@ -220,12 +219,12 @@ const featuredWorks = [
 }
 
 .stat-number {
-  font-size: 2.5rem;
-  font-weight: 800;
+  font-size: 2rem;
+  font-weight: 700;
 }
 
 .stat-label {
-  color: var(--text-muted);
+  color: var(--text-secondary);
   font-size: 0.875rem;
 }
 
@@ -237,10 +236,8 @@ const featuredWorks = [
 .code-window {
   background: var(--bg-card);
   border-radius: 12px;
-  border: 1px solid rgba(148, 163, 184, 0.1);
   overflow: hidden;
-  width: 100%;
-  max-width: 480px;
+  border: 1px solid rgba(148, 163, 184, 0.1);
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
 }
 
@@ -249,8 +246,7 @@ const featuredWorks = [
   align-items: center;
   gap: 8px;
   padding: 12px 16px;
-  background: rgba(30, 41, 59, 0.8);
-  border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+  background: rgba(0, 0, 0, 0.2);
 }
 
 .dot {
@@ -264,28 +260,21 @@ const featuredWorks = [
 .dot-green { background: #22c55e; }
 
 .code-window-title {
-  margin-left: auto;
-  color: var(--text-muted);
+  margin-left: 8px;
   font-size: 0.875rem;
+  color: var(--text-secondary);
 }
 
 .code-window-content {
   padding: 1.5rem;
-}
-
-.code-window-content pre {
-  margin: 0;
-}
-
-.code-window-content code {
-  font-family: 'Fira Code', 'Monaco', monospace;
+  font-family: 'Fira Code', 'JetBrains Mono', monospace;
   font-size: 0.875rem;
   line-height: 1.8;
 }
 
 .code-keyword { color: #c678dd; }
-.code-variable { color: #61afef; }
-.code-property { color: #e06c75; }
+.code-variable { color: #e06c75; }
+.code-property { color: #e5c07b; }
 .code-string { color: #98c379; }
 .code-comment { color: #5c6370; font-style: italic; }
 
@@ -297,22 +286,23 @@ const featuredWorks = [
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
   gap: 2rem;
-  margin-bottom: 3rem;
 }
 
 .view-more {
   text-align: center;
+  margin-top: 3rem;
 }
 
 .cta {
   padding: 6rem 0;
-  background: linear-gradient(180deg, transparent, rgba(14, 165, 233, 0.05));
 }
 
 .cta-content {
   text-align: center;
-  max-width: 600px;
-  margin: 0 auto;
+  padding: 4rem;
+  background: var(--bg-card);
+  border-radius: 24px;
+  border: 1px solid rgba(148, 163, 184, 0.1);
 }
 
 .cta-title {
@@ -323,14 +313,18 @@ const featuredWorks = [
 
 .cta-description {
   color: var(--text-secondary);
-  margin-bottom: 2rem;
   font-size: 1.125rem;
+  margin-bottom: 2rem;
 }
 
 @media (max-width: 968px) {
   .hero-content {
     grid-template-columns: 1fr;
     text-align: center;
+  }
+
+  .hero-title {
+    font-size: 3rem;
   }
 
   .hero-text {
@@ -344,14 +338,6 @@ const featuredWorks = [
   .hero-stats {
     justify-content: center;
   }
-
-  .hero-visual {
-    order: -1;
-  }
-
-  .hero-title {
-    font-size: 2.5rem;
-  }
 }
 
 @media (max-width: 640px) {
@@ -360,12 +346,7 @@ const featuredWorks = [
   }
 
   .hero-title {
-    font-size: 2rem;
-  }
-
-  .hero-stats {
-    flex-wrap: wrap;
-    gap: 1.5rem;
+    font-size: 2.5rem;
   }
 
   .works-grid {

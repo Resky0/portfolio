@@ -3,7 +3,7 @@
     <article class="article">
       <header class="article-header">
         <div class="container">
-          <NuxtLink to="/blog" class="back-link">← 返回博客</NuxtLink>
+          <RouterLink to="/blog" class="back-link">← 返回博客</RouterLink>
           <div class="article-meta">
             <span class="article-date">{{ article.date }}</span>
             <span class="article-category">{{ article.category }}</span>
@@ -41,12 +41,15 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
+
 const route = useRoute()
-const articleId = route.params.id
+const articleId = computed(() => route.params.id as string)
 
 const article = {
-  id: articleId,
+  id: articleId.value,
   title: '从零构建现代 Nuxt.js 应用',
   date: '2024-03-15',
   category: '前端开发',
@@ -71,10 +74,6 @@ Nuxt.js 是一个基于 Vue.js 的全栈框架，它提供了服务端渲染、�
 const shareToWechat = () => {
   alert('请截图分享到微信群或朋友圈')
 }
-
-useHead({
-  title: `${article.title} - 博客`
-})
 </script>
 
 <style scoped>
@@ -103,8 +102,8 @@ useHead({
   justify-content: center;
   gap: 1rem;
   margin-bottom: 1rem;
-  font-size: 0.9375rem;
   color: var(--text-muted);
+  font-size: 0.875rem;
 }
 
 .article-category {
@@ -112,19 +111,14 @@ useHead({
 }
 
 .article-title {
-  font-size: 2.75rem;
-  font-weight: 800;
-  line-height: 1.2;
+  font-size: 3rem;
+  font-weight: 700;
   margin-bottom: 1.5rem;
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .article-tags {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
   gap: 0.5rem;
 }
 
@@ -138,43 +132,31 @@ useHead({
 }
 
 .article-cover {
-  max-width: 1000px;
-  margin: 0 auto 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 0 2rem;
 }
 
 .article-cover img {
   width: 100%;
-  height: auto;
   border-radius: 16px;
 }
 
 .article-content {
-  padding: 0 0 4rem;
+  padding: 4rem 0;
 }
 
 .content-wrapper {
-  max-width: 720px;
+  max-width: 800px;
   margin: 0 auto;
+  line-height: 1.8;
   font-size: 1.125rem;
-  line-height: 1.9;
   color: var(--text-secondary);
-}
-
-.content-wrapper :deep(h2) {
-  font-size: 1.75rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin: 2.5rem 0 1rem;
-}
-
-.content-wrapper :deep(p) {
-  margin-bottom: 1.5rem;
+  white-space: pre-wrap;
 }
 
 .article-footer {
-  padding: 3rem 0;
-  background: var(--bg-card);
+  padding: 4rem 0;
   border-top: 1px solid rgba(148, 163, 184, 0.1);
 }
 
@@ -184,13 +166,7 @@ useHead({
 
 .share-text {
   color: var(--text-secondary);
-  margin-bottom: 1.5rem;
-}
-
-.share-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
+  margin-bottom: 1rem;
 }
 
 .share-btn {
@@ -205,8 +181,8 @@ useHead({
 }
 
 .share-btn:hover {
-  background: var(--primary-dark);
   transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(14, 165, 233, 0.3);
 }
 
 @media (max-width: 768px) {

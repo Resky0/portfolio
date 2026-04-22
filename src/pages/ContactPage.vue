@@ -92,7 +92,9 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import { reactive } from 'vue'
+
 const form = reactive({
   name: '',
   email: '',
@@ -107,10 +109,6 @@ const handleSubmit = () => {
   )
   window.location.href = `mailto:Resky0818@163.com?subject=${subject}&body=${body}`
 }
-
-useHead({
-  title: '联系 - Resky'
-})
 </script>
 
 <style scoped>
@@ -156,7 +154,7 @@ useHead({
   display: flex;
   align-items: center;
   gap: 1rem;
-  padding: 1.25rem;
+  padding: 1rem;
   background: var(--bg-card);
   border-radius: 12px;
   border: 1px solid rgba(148, 163, 184, 0.1);
@@ -169,7 +167,7 @@ useHead({
 }
 
 .method-icon {
-  font-size: 1.5rem;
+  font-size: 2rem;
 }
 
 .method-content {
@@ -199,10 +197,9 @@ useHead({
 
 .form-label {
   display: block;
-  font-size: 0.875rem;
-  font-weight: 600;
   margin-bottom: 0.5rem;
-  color: var(--text-secondary);
+  font-weight: 600;
+  color: var(--text-primary);
 }
 
 .form-input,
@@ -214,14 +211,14 @@ useHead({
   border-radius: 8px;
   color: var(--text-primary);
   font-size: 1rem;
-  font-family: inherit;
-  transition: border-color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .form-input:focus,
 .form-textarea:focus {
   outline: none;
   border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
 }
 
 .form-input::placeholder,
@@ -238,29 +235,9 @@ useHead({
   width: 100%;
 }
 
-.submit-btn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.submit-status {
-  margin-top: 1rem;
-  text-align: center;
-  font-weight: 500;
-}
-
-.submit-status.success {
-  color: #22c55e;
-}
-
-.submit-status.error {
-  color: #ef4444;
-}
-
 @media (max-width: 768px) {
   .contact-grid {
     grid-template-columns: 1fr;
-    gap: 2rem;
   }
 }
 </style>

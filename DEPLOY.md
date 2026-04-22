@@ -1,5 +1,13 @@
 # 部署指南
 
+## 项目类型
+
+这是一个基于 Vite 构建的 Vue 3 单页应用（SPA）。
+
+- 开发环境使用 `vite`
+- 生产构建产物目录是 `dist/`
+- 生产环境不需要运行 Node.js 服务端渲染
+
 ## 环境要求
 
 - Node.js >= 18.0.0
@@ -8,101 +16,118 @@
 ## 本地开发
 
 ```bash
-# 安装依赖
 npm install
-
-# 启动开发服务器
 npm run dev
-
-# 访问 http://localhost:3000
 ```
+
+默认访问地址：
+
+- `http://localhost:3000`
 
 ## 生产构建
 
 ```bash
-# 构建生产版本
 npm run build
+```
 
-# 预览生产版本
+构建完成后，静态文件输出到 `dist/` 目录。
+
+如需本地预览构建结果，可运行：
+
+```bash
 npm run preview
 ```
 
-## 部署到阿里云/腾讯云
+`vite preview` 只适合本地验证，不建议作为生产部署方式。
 
-### 方式一：使用 Node.js 应用托管
+## 部署方式
 
-1. **构建项目**
+### 方式一：静态文件部署
+
+适合部署到：
+
+- Nginx
+- 阿里云 OSS
+- 腾讯云 COS
+- Vercel
+- Netlify
+- GitHub Pages
+
+基础流程：
+
 ```bash
 npm install
 npm run build
 ```
 
-2. **配置 pm2 进程管理器**
-```bash
-npm install -g pm2
-pm2 start .output/server/index.mjs --name "portfolio"
-```
+然后将 `dist/` 目录中的文件上传到静态站点托管目录即可。
 
-3. **上传到云服务器**
-- 将整个项目上传到服务器
-- 或使用 Git 拉取代码后执行构建
+### 方式二：Docker + Nginx
 
-### 方式二：使用 Docker 部署
+项目根目录已提供可直接使用的 `Dockerfile` 和 `nginx.conf`。
 
-1. **创建 Dockerfile**
-```dockerfile
-FROM node:18-alpine
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci --only=production
-COPY .output ./
-EXPOSE 3000
-CMD ["node", ".output/server/index.mjs"]
-```
+构建镜像：
 
-2. **构建和运行**
 ```bash
 docker build -t portfolio .
-docker run -p 3000:3000 portfolio
 ```
 
-### 方式三：静态站点部署 (SSG)
-
-如果不需要服务端渲染，可以生成纯静态站点：
+运行容器：
 
 ```bash
-npm run generate
+docker run -d -p 3000:80 --name portfolio portfolio
 ```
 
-生成的静态文件在 `.output/public` 目录，可以直接部署到：
-- 阿里云 OSS
-- 腾讯云 COS
-- GitHub Pages
-- Vercel
-- 等等
+访问地址：
+
+- `http://localhost:3000`
 
 ## Nginx 配置示例
+
+如果你把 `dist/` 部署到自己的 Nginx，可以使用下面的配置。
 
 ```nginx
 server {
     listen 80;
     server_name your-domain.com;
 
+    root /var/www/portfolio/dist;
+    index index.html;
+
     location / {
-        proxy_pass http://localhost:3000;
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection 'upgrade';
-        proxy_set_header Host $host;
-        proxy_cache_bypass $http_upgrade;
+        try_files $uri $uri/ /index.html;
+    }
+
+    location /assets/ {
+        expires 30d;
+        add_header Cache-Control "public, immutable";
     }
 }
 ```
 
-## 环境变量配置
+`try_files $uri $uri/ /index.html;` 是 SPA 路由回退的关键配置，否则刷新如 `/works`、`/about` 这类前端路由时会返回 404。
 
-创建 `.env` 文件：
+## 环境变量
+
+当前项目没有必需的构建期或运行期环境变量。
+
+如果后续需要在前端读取环境变量，请遵循 Vite 约定：
+
+- 变量名必须以 `VITE_` 开头
+- 在代码中通过 `import.meta.env` 访问
+
+示例：
 
 ```env
-NUXT_PUBLIC_SITE_NAME=我的个人作品集
+VITE_SITE_NAME=我的个人作品集
+```
+
+## 子路径部署
+
+如果站点不是部署在域名根路径，而是例如 `https://example.com/portfolio/`，需要在 `vite.config.ts` 中补充或调整 `base` 配置，例如：
+
+```ts
+export default defineConfig({
+  base: '/portfolio/'
+})
 ```

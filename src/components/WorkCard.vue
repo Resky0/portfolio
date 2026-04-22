@@ -16,13 +16,17 @@
   </div>
 </template>
 
-<script setup>
-defineProps({
+<script setup lang="ts">
+defineProps<{
   work: {
-    type: Object,
-    required: true
+    id: number
+    title: string
+    description: string
+    tags: string[]
+    image: string
+    link: string
   }
-})
+}>()
 </script>
 
 <style scoped>
