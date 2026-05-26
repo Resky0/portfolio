@@ -12,28 +12,31 @@
         <div class="about-grid">
           <div class="about-image">
             <div class="image-wrapper">
-              <img src="https://picsum.photos/seed/avatar/400/400" alt="头像" />
+              <img src="/src/assets/photo.png" alt="头像" />
               <div class="image-decoration"></div>
             </div>
           </div>
           <div class="about-content">
             <h2 class="about-title">你好，很高兴认识你</h2>
             <p class="about-text">
-              我是一名 AI 全栈开发工程师，专注于 Java 后端开发与智能应用构建。
+              我是一名 AI 全栈开发工程师，27届硕士在读，研究方向为高分子与深度学习的交叉学科。
               对 Java 核心技术（集合、多线程、JVM）有深入理解，熟练掌握 Spring 全家桶。
             </p>
             <p class="about-text">
-              热衷于 RAG 知识库构建和 AI 工具开发，善于利用 Spring AI 和大模型平台
-              实现智能化解决方案。如果你有有趣的项目想法或合作机会，欢迎联系我！
+              热衷于 AI 应用构建，熟悉 LangChain4j、Spring AI 等框架，善于利用 RAG 知识库和
+              Tool Calling 实现智能化解决方案。如果你有有趣的项目想法或合作机会，欢迎联系我！
             </p>
             <div class="about-details">
               <div class="detail-item">
-                <span class="detail-label">位置</span>
-                <span class="detail-value">中国</span>
+                <span class="detail-label">状态</span>
+                <span class="detail-value">
+                  27届应届硕士
+                  <span class="about-job-badge">求职中</span>
+                </span>
               </div>
               <div class="detail-item">
                 <span class="detail-label">专长</span>
-                <span class="detail-value">Java / Spring AI / RAG / MySQL / Redis</span>
+                <span class="detail-value">Java / LangChain4j / Spring AI / RAG / MySQL / Redis</span>
               </div>
               <div class="detail-item">
                 <span class="detail-label">邮箱</span>
@@ -83,37 +86,41 @@
 const skillCategories = [
   {
     name: 'Java 核心技术',
-    items: ['集合', '多线程', 'IO', 'JVM 内存模型', '垃圾回收', '类加载机制']
+    items: ['集合', '多线程',  'JVM 内存模型', '垃圾回收', '类加载机制']
   },
   {
     name: 'Spring 全家桶',
-    items: ['Spring', 'SpringMVC', 'SpringBoot', 'MyBatisPlus', 'IOC/DI', 'AOP']
+    items: ['Spring', 'SpringMVC', 'SpringBoot', 'MyBatisPlus', 'IOC/DI', 'AOP', 'Bean 生命周期']
   },
   {
     name: '数据库与缓存',
-    items: ['MySQL', 'Redis', '索引', '事务', '锁机制', '数据库调优']
+    items: ['MySQL', 'Redis', '索引优化', '事务', '锁机制', '数据库调优', '缓存雪崩/穿透/击穿']
   },
   {
     name: 'AI 与大模型',
-    items: ['RAG 知识库', 'Spring AI', 'Tool Calling', '向量数据库', '百炼平台']
+    items: ['LangChain4j', 'Spring AI', 'RAG 知识库', 'Tool Calling', '百炼平台', 'AI 工作流']
+  },
+  {
+    name: 'AI 开发环境',
+    items: ['Cursor', 'Trae', 'Codex', 'Harness Engineering']
   }
 ]
 
 const experiences = [
   {
-    period: '2022 - 至今',
-    title: '独立开发',
-    description: '作为独立开发者，为个人和小型企业提供 Web 应用开发和咨询服务'
+    period: '2026.01 - 2026.04',
+    title: '某互联网公司 · 全栈开发实习生',
+    description: '参与开源项目协作开发，独立构建 AI 场景助理 MVP（企微智能机器人 × 工作流 × Webhook），将全流程响应时间从 10 秒压缩至 3 秒以内。参与 WorkBuddy 平台 AI 写作 Skill 系统设计与后端集成开发。'
   },
   {
-    period: '2019 - 2022',
-    title: '全栈开发工程师',
-    description: '在科技公司担任全栈开发，负责核心产品功能开发和团队协作'
+    period: '2024.09 - 2027.06',
+    title: '鲁东大学 · 硕士',
+    description: '材料科学与工程（交叉学科），高分子与深度学习交叉方向，以第一作者身份发表一篇 SCI 一区 TOP 学术论文，涉及智能材料与传感器系统'
   },
   {
-    period: '2017 - 2019',
-    title: '前端开发工程师',
-    description: '从事前端开发工作，负责公司官网和内部系统的开发与维护'
+    period: '2019.09 - 2023.06',
+    title: '齐鲁工业大学 · 本科',
+    description: '计算机科学与技术专业，主修数据结构、计算机组成原理、操作系统、计算机网络，专业排名前 15%，连续三年获得学业奖学金'
   }
 ]
 </script>
@@ -194,6 +201,26 @@ const experiences = [
 
 .detail-value {
   color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.about-job-badge {
+  display: inline-block;
+  padding: 0.125rem 0.625rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(135deg, #ef4444, #f97316);
+  border-radius: 999px;
+  animation: pulse-about-badge 2s ease-in-out infinite;
+}
+
+@keyframes pulse-about-badge {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
 }
 
 .skills-section,

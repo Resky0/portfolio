@@ -14,7 +14,7 @@
             <h2 class="contact-title">让我们建立联系</h2>
             <p class="contact-description">
               如果你有有趣的项目想法、想讨论技术问题、或者只是想打个招呼，
-              我都很乐意收到你的消息。通常会在 24 小时内回复。
+              我都很乐意收到你的消息。我通常会在 24 小时内回复。
             </p>
 
             <div class="contact-methods">
@@ -81,9 +81,15 @@
                   required
                 ></textarea>
               </div>
-              <button type="submit" class="btn-primary submit-btn">
-                发送消息
+              <button 
+                type="submit" 
+                class="btn-primary submit-btn"
+                :disabled="isSubmitting || !rateLimit.allowed"
+              >
+                {{ isSubmitting ? '发送中...' : '发送消息' }}
               </button>
+              <p v-if="!rateLimit.allowed" class="rate-limit-msg">{{ rateLimit.message }}</p>
+              <p v-else class="rate-limit-hint">今日还可发送 {{ rateLimit.remaining }} 条消息</p>
             </form>
           </div>
         </div>
@@ -93,7 +99,9 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
+import { sendEmail } from '../utils/email'
+import { checkRateLimit, incrementRateLimit } from '../utils/rateLimiter'
 
 const form = reactive({
   name: '',
@@ -102,12 +110,42 @@ const form = reactive({
   message: ''
 })
 
-const handleSubmit = () => {
-  const subject = encodeURIComponent(form.subject || '来自作品集网站的咨询')
-  const body = encodeURIComponent(
-    `姓名：${form.name}\n邮箱：${form.email}\n\n${form.message}`
-  )
-  window.location.href = `mailto:Resky0818@163.com?subject=${subject}&body=${body}`
+const isSubmitting = ref(false)
+const rateLimit = ref(checkRateLimit())
+
+const handleSubmit = async () => {
+  rateLimit.value = checkRateLimit()
+  if (!rateLimit.value.allowed) {
+    return
+  }
+
+  isSubmitting.value = true
+
+  try {
+    const result = await sendEmail({
+      from_name: form.name,
+      from_email: form.email,
+      subject: form.subject || '来自作品集网站的咨询',
+      message: `姓名：${form.name}\n邮箱：${form.email}\n\n${form.message}`
+    })
+
+    if (result.success) {
+      incrementRateLimit()
+      rateLimit.value = checkRateLimit()
+      alert('邮件发送成功！我会尽快回复您。')
+      form.name = ''
+      form.email = ''
+      form.subject = ''
+      form.message = ''
+    } else {
+      alert('邮件发送失败，请稍后重试')
+    }
+  } catch (error) {
+    console.error('发送错误:', error)
+    alert('网络错误，请稍后重试')
+  } finally {
+    isSubmitting.value = false
+  }
 }
 </script>
 
@@ -233,6 +271,20 @@ const handleSubmit = () => {
 
 .submit-btn {
   width: 100%;
+}
+
+.rate-limit-msg {
+  text-align: center;
+  color: #ef4444;
+  font-size: 0.875rem;
+  margin-top: 0.75rem;
+}
+
+.rate-limit-hint {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  margin-top: 0.75rem;
 }
 
 @media (max-width: 768px) {

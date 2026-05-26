@@ -27,50 +27,26 @@ import WorkCard from '../components/WorkCard.vue'
 const works = [
   {
     id: 1,
-    title: '任务管理应用',
-    description: '一款简洁高效的个人任务管理工具，支持看板和时间追踪，帮助你高效管理日常任务',
-    tags: ['Vue 3', 'Node.js', 'MongoDB'],
+    title: 'AI 项目生成器',
+    description: '基于 Spring Boot 3 + LangChain4j + LangGraph4j 的 AI 应用生成平台。核心为 AI 工作流，采用多级缓存、分布式限流、异步处理、护轨重试等多种优化策略，保证系统的高性能与稳定性',
+    tags: ['Spring Boot 3', 'LangChain4j', 'LangGraph4j', 'Redis', 'Redisson'],
     image: 'https://picsum.photos/seed/project1/600/400',
     link: '#'
   },
   {
     id: 2,
-    title: '博客平台',
-    description: '基于 Markdown 的技术博客系统，支持代码高亮和 SEO 优化，为技术创作者打造',
-    tags: ['Nuxt', 'Tailwind', 'Supabase'],
+    title: '旅游回忆册',
+    description: '基于 Spring Boot + Redis + COS + AI + WebSocket 的企业级图片素材平台，支持公共、私有与团队协同图库',
+    tags: ['Spring Boot', 'Redis', 'WebSocket', 'AI', 'COS'],
     image: 'https://picsum.photos/seed/project2/600/400',
     link: '#'
   },
   {
     id: 3,
-    title: '在线笔记',
-    description: '实时协作的在线笔记应用，支持 Markdown 和知识图谱，让知识管理更高效',
-    tags: ['React', 'Firebase', 'TypeScript'],
+    title: 'AI 智能客服',
+    description: '基于 Spring Boot 3 + Spring AI + RAG + Tool Calling 的企业级 AI 客服智能体，支持多轮对话、工具调用与知识库检索',
+    tags: ['Spring Boot 3', 'Spring AI', 'RAG', 'Tool Calling'],
     image: 'https://picsum.photos/seed/project3/600/400',
-    link: '#'
-  },
-  {
-    id: 4,
-    title: '天气预报应用',
-    description: '优雅的天气预报 PWA，支持全球城市搜索和 7 天预报，实时更新天气数据',
-    tags: ['Vue 3', 'OpenWeather API', 'PWA'],
-    image: 'https://picsum.photos/seed/project4/600/400',
-    link: '#'
-  },
-  {
-    id: 5,
-    title: '个人理财助手',
-    description: '简洁的个人收支记录应用，支持图表统计和预算设置，帮你掌控财务状况',
-    tags: ['React', 'Chart.js', 'LocalStorage'],
-    image: 'https://picsum.photos/seed/project5/600/400',
-    link: '#'
-  },
-  {
-    id: 6,
-    title: '在线白板',
-    description: '基于 Canvas 的实时协作白板，支持多种图形工具，适合远程团队头脑风暴',
-    tags: ['Canvas', 'Socket.io', 'Express'],
-    image: 'https://picsum.photos/seed/project6/600/400',
     link: '#'
   }
 ]

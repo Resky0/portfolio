@@ -42,6 +42,7 @@
             <a href="mailto:Resky0818@163.com">邮箱</a>
           </div>
           <p class="footer-copyright">© 2026 个人作品集. 用 ❤️ 和代码构建</p>
+          <a href="https://beian.miit.gov.cn/" target="_blank" class="footer-beian">鲁ICP备2026026679号</a>
         </div>
       </div>
     </footer>
@@ -204,6 +205,21 @@ watch(() => route.path, () => {
 .footer-copyright {
   color: var(--text-muted);
   font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+}
+
+.footer-beian {
+  display: inline-block;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  opacity: 0.7;
+}
+
+.footer-beian:hover {
+  color: var(--primary);
+  opacity: 1;
 }
 
 @media (max-width: 768px) {

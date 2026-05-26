@@ -11,10 +11,12 @@
           <p class="hero-greeting">你好，我是</p>
           <h1 class="hero-title">
             <span class="gradient-text">Resky</span>
+            <span class="job-badge">求职中</span>
           </h1>
+          <p class="hero-status">27届应届硕士 · 期待机会</p>
           <p class="hero-description">
-            AI 全栈开发工程师，专注于 Java 后端与智能应用开发。热衷于用 Spring AI
-            构建智能化解决方案，让技术创造实际价值。
+            AI 全栈开发工程师，27届硕士在读，专注于 Java 后端与 AI 应用开发。热衷于用 LangChain4j 和 Spring AI
+            构建 RAG 知识库与 AI 智能体，让技术创造实际价值。
           </p>
           <div class="hero-actions">
             <RouterLink to="/works" class="btn-primary">查看作品</RouterLink>
@@ -22,7 +24,7 @@
           </div>
           <div class="hero-stats">
             <div class="stat">
-              <span class="stat-number gradient-text">5+</span>
+              <span class="stat-number gradient-text">3+</span>
               <span class="stat-label">项目作品</span>
             </div>
             <div class="stat">
@@ -31,7 +33,7 @@
             </div>
             <div class="stat">
               <span class="stat-number gradient-text">AI</span>
-              <span class="stat-label">工具开发</span>
+              <span class="stat-label">智能体开发</span>
             </div>
           </div>
         </div>
@@ -48,10 +50,11 @@
   <span class="code-property">name</span>: <span class="code-string">'Resky'</span>,
   <span class="code-property">skills</span>: [
     <span class="code-string">'Java'</span>, <span class="code-string">'SpringBoot'</span>,
-    <span class="code-string">'MySQL'</span>, <span class="code-string">'Redis'</span>
+    <span class="code-string">'MySQL'</span>, <span class="code-string">'Redis'</span>,
+    <span class="code-string">'LangChain4j'</span>, <span class="code-string">'RAG'</span>
   ],
   <span class="code-property">passion</span>: <span class="code-string">'AI 全栈开发'</span>,
-  <span class="code-property">status</span>: <span class="code-string">'available'</span>
+  <span class="code-property">status</span>: <span class="code-string">'27届硕士'</span>
 }
 
 <span class="code-comment">// 正在构建智能应用...</span></code></pre>
@@ -96,25 +99,25 @@ import WorkCard from '../components/WorkCard.vue'
 const featuredWorks = [
   {
     id: 1,
-    title: '任务管理应用',
-    description: '一款简洁高效的个人任务管理工具，支持看板和时间追踪',
-    tags: ['Vue 3', 'Node.js', 'MongoDB'],
+    title: 'AI 项目生成器',
+    description: '基于 Spring Boot 3 + LangChain4j + LangGraph4j 的 AI 应用生成平台，支持多节点自动化工作流',
+    tags: ['Spring Boot 3', 'LangChain4j', 'LangGraph4j', 'Redis'],
     image: 'https://picsum.photos/seed/project1/600/400',
     link: '#'
   },
   {
     id: 2,
-    title: '博客平台',
-    description: '基于 Markdown 的技术博客系统，支持代码高亮和 SEO 优化',
-    tags: ['Nuxt', 'Tailwind', 'Supabase'],
+    title: '旅游回忆册',
+    description: '基于 Spring Boot + Redis + COS + AI + WebSocket 的企业级图片素材平台',
+    tags: ['Spring Boot', 'Redis', 'WebSocket', 'AI'],
     image: 'https://picsum.photos/seed/project2/600/400',
     link: '#'
   },
   {
     id: 3,
-    title: '在线笔记',
-    description: '实时协作的在线笔记应用，支持 Markdown 和知识图谱',
-    tags: ['React', 'Firebase', 'TypeScript'],
+    title: 'AI 智能客服',
+    description: '基于 Spring Boot 3 + Spring AI + RAG + Tool Calling 的企业级 AI 客服智能体',
+    tags: ['Spring Boot 3', 'Spring AI', 'RAG'],
     image: 'https://picsum.photos/seed/project3/600/400',
     link: '#'
   }
@@ -188,11 +191,38 @@ const featuredWorks = [
   margin-bottom: 0.5rem;
 }
 
+.hero-status {
+  font-size: 1rem;
+  color: var(--primary);
+  margin-bottom: 0.25rem;
+  font-weight: 500;
+}
+
 .hero-title {
   font-size: 4rem;
   font-weight: 700;
   margin-bottom: 1.5rem;
   line-height: 1.1;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.job-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(135deg, #ef4444, #f97316);
+  border-radius: 999px;
+  animation: pulse-badge 2s ease-in-out infinite;
+}
+
+@keyframes pulse-badge {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
 }
 
 .hero-description {
@@ -325,6 +355,7 @@ const featuredWorks = [
 
   .hero-title {
     font-size: 3rem;
+    justify-content: center;
   }
 
   .hero-text {
