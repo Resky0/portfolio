@@ -100,26 +100,26 @@ const featuredWorks = [
   {
     id: 1,
     title: 'AI 项目生成器',
-    description: '基于 Spring Boot 3 + LangChain4j + LangGraph4j 的 AI 应用生成平台，支持多节点自动化工作流',
-    tags: ['Spring Boot 3', 'LangChain4j', 'LangGraph4j', 'Redis'],
-    image: 'https://picsum.photos/seed/project1/600/400',
-    link: '#'
+    description: '基于 Spring Boot 3 + LangChain4j + LangGraph4j 的 AI 应用生成平台，采用多级缓存、分布式限流、异步处理等多种优化策略',
+    tags: ['Spring Boot 3', 'LangChain4j', 'LangGraph4j', 'Redis', 'Redisson'],
+    image: 'https://raw.githubusercontent.com/Resky0/MdPicture/img/img/image-20260527202037798.png',
+    link: 'https://github.com/Resky0/AI-assisted-code-generation-platform'
   },
   {
     id: 2,
     title: '旅游回忆册',
-    description: '基于 Spring Boot + Redis + COS + AI + WebSocket 的企业级图片素材平台',
-    tags: ['Spring Boot', 'Redis', 'WebSocket', 'AI'],
-    image: 'https://picsum.photos/seed/project2/600/400',
-    link: '#'
+    description: '基于 Spring Boot + Redis + COS + AI + WebSocket 的企业级图片素材平台，支持公共、私有与团队协同图库',
+    tags: ['Spring Boot', 'Redis', 'WebSocket', 'AI', 'COS'],
+    image: 'https://raw.githubusercontent.com/Resky0/MdPicture/img/img/image-20260528160757554.png',
+    link: 'https://github.com/Resky0/picture'
   },
   {
     id: 3,
     title: 'AI 智能客服',
-    description: '基于 Spring Boot 3 + Spring AI + RAG + Tool Calling 的企业级 AI 客服智能体',
-    tags: ['Spring Boot 3', 'Spring AI', 'RAG'],
-    image: 'https://picsum.photos/seed/project3/600/400',
-    link: '#'
+    description: '基于 Spring Boot 3 + Spring AI + Vue 3 + MySQL 的 AI 摄影辅助平台，集成通义千问多模态大模型',
+    tags: ['Spring Boot 3', 'Spring AI', 'Vue3'],
+    image: 'https://raw.githubusercontent.com/Resky0/MdPicture/img/img/image-20260528194221421.png',
+    link: 'https://github.com/Resky0/PictureMentor'
   }
 ]
 </script>
