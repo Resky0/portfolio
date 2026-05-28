@@ -43,7 +43,7 @@ const works = [
   },
   {
     id: 3,
-    title: 'AI 智能客服',
+    title: 'PhotoMentor',
     description: '基于 Spring Boot 3 + Spring AI + Vue 3 + MySQL 的 AI 摄影辅助平台，集成通义千问多模态大模型，支持照片智能评分、改进建议生成与实时拍摄指导，适配多端设备',
     tags: ['Spring Boot 3', 'Spring AI', 'Vue3'],
     image: 'https://raw.githubusercontent.com/Resky0/MdPicture/img/img/image-20260528194221421.png',
