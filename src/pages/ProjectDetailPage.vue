@@ -8,6 +8,20 @@
             <p class="project-kicker">Project Case</p>
             <h1 class="project-title gradient-text">{{ work.title }}</h1>
             <p class="project-description">{{ work.description }}</p>
+            <div class="project-meta-strip">
+              <div>
+                <span>角色</span>
+                <strong>{{ work.role }}</strong>
+              </div>
+              <div>
+                <span>项目类型</span>
+                <strong>AI 应用 / 后端工程</strong>
+              </div>
+              <div>
+                <span>核心栈</span>
+                <strong>{{ work.tags.slice(0, 3).join(' / ') }}</strong>
+              </div>
+            </div>
             <div class="project-tags">
               <span v-for="tag in work.tags" :key="tag" class="tag">{{ tag }}</span>
             </div>
@@ -57,8 +71,14 @@
               <h2>难点与解决方案</h2>
               <div class="challenge-list">
                 <div v-for="challenge in work.challenges" :key="challenge.title" class="challenge-item">
-                  <h3>{{ challenge.title }}</h3>
-                  <p>{{ challenge.solution }}</p>
+                  <div class="challenge-problem">
+                    <span>难点</span>
+                    <h3>{{ challenge.title }}</h3>
+                  </div>
+                  <div class="challenge-solution">
+                    <span>解决方案</span>
+                    <p>{{ challenge.solution }}</p>
+                  </div>
                 </div>
               </div>
             </section>
@@ -124,7 +144,7 @@ const work = computed(() => getWorkBySlug(route.params.slug as string))
 
 .project-hero-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(360px, 520px);
+  grid-template-columns: minmax(0, 1fr) minmax(420px, 620px);
   gap: 3rem;
   align-items: center;
 }
@@ -162,6 +182,37 @@ const work = computed(() => getWorkBySlug(route.params.slug as string))
   margin-bottom: 1.5rem;
 }
 
+.project-meta-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  background: rgba(148, 163, 184, 0.12);
+  border: 1px solid rgba(148, 163, 184, 0.12);
+  border-radius: 12px;
+}
+
+.project-meta-strip div {
+  min-width: 0;
+  padding: 1rem;
+  background: rgba(30, 41, 59, 0.78);
+}
+
+.project-meta-strip span {
+  display: block;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  margin-bottom: 0.35rem;
+}
+
+.project-meta-strip strong {
+  display: block;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
 .project-tags {
   display: flex;
   flex-wrap: wrap;
@@ -195,7 +246,7 @@ const work = computed(() => getWorkBySlug(route.params.slug as string))
 .project-cover img {
   width: 100%;
   display: block;
-  aspect-ratio: 16/10;
+  aspect-ratio: 16/9;
   object-fit: cover;
 }
 
@@ -287,12 +338,22 @@ const work = computed(() => getWorkBySlug(route.params.slug as string))
 
 .challenge-item {
   padding: 1.25rem;
+  display: grid;
+  grid-template-columns: minmax(160px, 0.38fr) minmax(0, 1fr);
+  gap: 1.25rem;
+  align-items: start;
+}
+
+.challenge-item span {
+  display: block;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  margin-bottom: 0.4rem;
 }
 
 .challenge-item h3 {
   color: var(--primary);
   font-size: 1rem;
-  margin-bottom: 0.5rem;
 }
 
 .detail-aside {
@@ -358,6 +419,11 @@ const work = computed(() => getWorkBySlug(route.params.slug as string))
 
   .project-actions {
     flex-direction: column;
+  }
+
+  .project-meta-strip,
+  .challenge-item {
+    grid-template-columns: 1fr;
   }
 }
 </style>

@@ -85,6 +85,7 @@
             v-for="work in featuredWorks"
             :key="work.id"
             :work="work"
+            :highlight-limit="2"
           />
         </div>
         <div class="view-more">

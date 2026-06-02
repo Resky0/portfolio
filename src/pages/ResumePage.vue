@@ -6,6 +6,12 @@
           <p class="resume-kicker">Resume</p>
           <h1 class="section-title gradient-text">Resky · AI 应用开发工程师</h1>
           <p class="section-subtitle">在线预览简历，也可以下载 PDF 保存到本地。</p>
+          <div class="resume-meta">
+            <span>AI 应用开发</span>
+            <span>Java 后端</span>
+            <span>27届硕士</span>
+            <span>Spring AI / RAG</span>
+          </div>
         </div>
         <div class="resume-actions">
           <a :href="resumeUrl" class="btn-primary" download="AI应用开发工程师-曹敬昊.pdf">下载简历</a>
@@ -71,7 +77,23 @@ const resumeUrl = '/resume-cao-jinghao-ai-engineer.pdf'
 }
 
 .resume-header .section-subtitle {
-  margin-bottom: 0;
+  margin-bottom: 1rem;
+}
+
+.resume-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.resume-meta span {
+  padding: 0.45rem 0.75rem;
+  color: var(--text-primary);
+  background: rgba(14, 165, 233, 0.1);
+  border: 1px solid rgba(14, 165, 233, 0.22);
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
 }
 
 .resume-actions {
@@ -146,6 +168,10 @@ const resumeUrl = '/resume-cao-jinghao-ai-engineer.pdf'
   .resume-actions {
     justify-content: center;
     flex-wrap: wrap;
+  }
+
+  .resume-meta {
+    justify-content: center;
   }
 
   .resume-viewer {

@@ -9,8 +9,8 @@
     <div class="work-content">
       <h3 class="work-title">{{ work.title }}</h3>
       <p class="work-description">{{ work.description }}</p>
-      <ul v-if="work.highlights?.length" class="work-highlights">
-        <li v-for="highlight in work.highlights" :key="highlight">{{ highlight }}</li>
+      <ul v-if="visibleHighlights.length" class="work-highlights">
+        <li v-for="highlight in visibleHighlights" :key="highlight">{{ highlight }}</li>
       </ul>
       <div class="work-tags">
         <span v-for="tag in work.tags" :key="tag" class="tag">{{ tag }}</span>
@@ -20,11 +20,17 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import type { WorkProject } from '../data/works'
 
-defineProps<{
+const props = withDefaults(defineProps<{
   work: WorkProject
-}>()
+  highlightLimit?: number
+}>(), {
+  highlightLimit: Infinity
+})
+
+const visibleHighlights = computed(() => props.work.highlights.slice(0, props.highlightLimit))
 </script>
 
 <style scoped>
