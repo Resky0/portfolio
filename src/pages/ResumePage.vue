@@ -4,7 +4,7 @@
       <div class="container resume-header-inner">
         <div>
           <p class="resume-kicker">Resume</p>
-          <h1 class="section-title gradient-text">曹敬昊 · AI 应用开发工程师</h1>
+          <h1 class="section-title gradient-text">Resky · AI 应用开发工程师</h1>
           <p class="section-subtitle">在线预览简历，也可以下载 PDF 保存到本地。</p>
         </div>
         <div class="resume-actions">
@@ -34,18 +34,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted } from 'vue'
-
 const resumeUrl = '/resume-cao-jinghao-ai-engineer.pdf'
-const pageTitle = 'AI应用开发工程师-曹敬昊'
-
-onMounted(() => {
-  document.title = pageTitle
-})
-
-onUnmounted(() => {
-  document.title = 'Resky - AI 全栈开发工程师'
-})
 </script>
 
 <style scoped>

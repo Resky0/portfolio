@@ -105,20 +105,12 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted } from 'vue'
+import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { getWorkBySlug } from '../data/works'
 
 const route = useRoute()
 const work = computed(() => getWorkBySlug(route.params.slug as string))
-
-onMounted(() => {
-  document.title = work.value ? `${work.value.title} - 项目详情` : '项目不存在'
-})
-
-onUnmounted(() => {
-  document.title = 'Resky - AI 全栈开发工程师'
-})
 </script>
 
 <style scoped>
