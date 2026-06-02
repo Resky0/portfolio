@@ -14,7 +14,7 @@
           </div>
         </div>
         <div class="resume-actions">
-          <a :href="resumeUrl" class="btn-primary" download="AI应用开发工程师-曹敬昊.pdf">下载简历</a>
+          <a :href="resumeUrl" class="btn-primary" download="AI应用开发工程师-公开版.pdf">下载简历</a>
           <a :href="resumeUrl" class="btn-secondary" target="_blank" rel="noopener">新窗口打开</a>
         </div>
       </div>
@@ -24,9 +24,9 @@
       <div class="container">
         <div class="resume-viewer">
           <div class="resume-toolbar">
-            <span>AI应用开发工程师-曹敬昊.pdf</span>
+            <span>AI应用开发工程师-公开版.pdf</span>
             <div class="resume-toolbar-actions">
-              <a :href="resumeUrl" download="AI应用开发工程师-曹敬昊.pdf">下载</a>
+              <a :href="resumeUrl" download="AI应用开发工程师-公开版.pdf">下载</a>
               <a :href="resumeUrl" target="_blank" rel="noopener">新窗口</a>
             </div>
           </div>
@@ -35,7 +35,7 @@
               <h2>当前浏览器无法直接预览 PDF</h2>
               <p>你仍然可以下载简历，或在新窗口中打开查看。</p>
               <div class="resume-fallback-actions">
-                <a :href="resumeUrl" class="btn-primary" download="AI应用开发工程师-曹敬昊.pdf">下载简历</a>
+                <a :href="resumeUrl" class="btn-primary" download="AI应用开发工程师-公开版.pdf">下载简历</a>
                 <a :href="resumeUrl" class="btn-secondary" target="_blank" rel="noopener">新窗口打开</a>
               </div>
             </div>

@@ -250,5 +250,6 @@ watch(() => route.path, () => {
   .mobile-menu {
     display: flex;
   }
+
 }
 </style>

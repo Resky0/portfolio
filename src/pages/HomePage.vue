@@ -8,15 +8,14 @@
       </div>
       <div class="container hero-content">
         <div class="hero-text animate-fade-in-up">
-          <p class="hero-greeting">你好，我是</p>
+          <p class="hero-greeting">AI 应用开发作品集</p>
           <h1 class="hero-title">
             <span class="gradient-text">Resky</span>
             <span class="job-badge">求职中</span>
           </h1>
-          <p class="hero-status">27届应届硕士 · 求职 AI 应用开发 / Java 后端</p>
+          <p class="hero-status">用 Java 工程能力，把 AI 应用落到真实业务里</p>
           <p class="hero-description">
-            专注 Spring Boot 后端工程与 AI 应用落地，熟悉 LangChain4j、Spring AI、RAG 知识库和智能体工作流，
-            能把大模型能力接入真实业务流程。
+            27届应届硕士，求职 AI 应用开发 / Java 后端岗位。熟悉 Spring Boot、LangChain4j、Spring AI、RAG 知识库和智能体工作流。
           </p>
           <div class="hero-focus">
             <span>AI 应用开发</span>
@@ -485,32 +484,45 @@ const featuredWorks = works.slice(0, 3)
 
 @media (max-width: 640px) {
   .hero {
-    padding: 2rem 0;
+    min-height: auto;
+    padding: 2rem 0 3rem;
+  }
+
+  .hero-content {
+    gap: 2rem;
   }
 
   .hero-title {
     font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .hero-status {
+    font-size: 1.05rem;
+    line-height: 1.55;
+  }
+
+  .hero-description {
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+
+  .hero-proof {
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-proof li:nth-child(n+2),
+  .hero-stats,
+  .hero-visual,
+  .hero-actions .btn-secondary:last-child {
+    display: none;
   }
 
   .hero-actions {
     flex-direction: column;
     align-items: stretch;
-  }
-
-  .hero-stats {
-    gap: 0.75rem;
-  }
-
-  .stat {
-    flex: 1 1 100%;
-  }
-
-  .career-panel {
-    padding: 1rem;
-  }
-
-  .career-panel-grid {
-    grid-template-columns: 1fr;
+    margin-bottom: 0;
   }
 
   .works-grid {
