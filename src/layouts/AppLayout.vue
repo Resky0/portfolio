@@ -44,7 +44,7 @@
             <a href="mailto:Resky0818@163.com">邮箱</a>
             <RouterLink to="/resume">简历</RouterLink>
           </div>
-          <p class="footer-copyright">© 2026 个人作品集. 用 ❤️ 和代码构建</p>
+          <p class="footer-copyright">© 2026 Resky. AI 应用开发作品集。</p>
           <a href="https://beian.miit.gov.cn/" target="_blank" class="footer-beian">鲁ICP备2026026679号</a>
         </div>
       </div>
