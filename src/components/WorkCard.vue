@@ -3,7 +3,7 @@
     <div class="work-image">
       <img :src="work.image" :alt="work.title" />
       <div class="work-overlay">
-        <a :href="work.link" target="_blank" rel="noopener" class="work-link">查看项目 →</a>
+        <a :href="work.link" class="work-link">查看项目 →</a>
       </div>
     </div>
     <div class="work-content">
