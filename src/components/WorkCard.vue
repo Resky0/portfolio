@@ -3,12 +3,15 @@
     <div class="work-image">
       <img :src="work.image" :alt="work.title" />
       <div class="work-overlay">
-        <a :href="work.link" class="work-link">查看项目 →</a>
+        <a :href="work.link" target="_blank" rel="noopener" class="work-link">查看项目 →</a>
       </div>
     </div>
     <div class="work-content">
       <h3 class="work-title">{{ work.title }}</h3>
       <p class="work-description">{{ work.description }}</p>
+      <ul v-if="work.highlights?.length" class="work-highlights">
+        <li v-for="highlight in work.highlights" :key="highlight">{{ highlight }}</li>
+      </ul>
       <div class="work-tags">
         <span v-for="tag in work.tags" :key="tag" class="tag">{{ tag }}</span>
       </div>
@@ -22,6 +25,7 @@ defineProps<{
     id: number
     title: string
     description: string
+    highlights?: string[]
     tags: string[]
     image: string
     link: string
@@ -104,6 +108,33 @@ defineProps<{
   font-size: 0.9375rem;
   line-height: 1.6;
   margin-bottom: 1rem;
+}
+
+.work-highlights {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0 0 1rem;
+  padding: 0;
+  list-style: none;
+}
+
+.work-highlights li {
+  position: relative;
+  padding-left: 1rem;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  line-height: 1.55;
+}
+
+.work-highlights li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.68em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--primary);
 }
 
 .work-tags {

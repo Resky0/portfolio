@@ -70,7 +70,7 @@ onUnmounted(() => {
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  text-align: center;
+  text-align: left;
   margin-bottom: 0.5rem;
 }
 
@@ -146,6 +146,7 @@ onUnmounted(() => {
     text-align: center;
   }
 
+  .resume-kicker,
   .resume-header .section-title,
   .resume-header .section-subtitle {
     text-align: center;

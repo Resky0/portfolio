@@ -11,6 +11,7 @@
           <RouterLink to="/works" class="nav-link" :class="{ active: route.path === '/works' }">作品集</RouterLink>
           <a href="https://blog.csdn.net/m0_54000398?type=blog" class="nav-link" target="_blank" rel="noopener">博客</a>
           <RouterLink to="/about" class="nav-link" :class="{ active: route.path === '/about' }">关于</RouterLink>
+          <RouterLink to="/resume" class="nav-link" :class="{ active: route.path === '/resume' }">简历</RouterLink>
           <RouterLink to="/contact" class="nav-link" :class="{ active: route.path === '/contact' }">联系</RouterLink>
         </nav>
         <button class="mobile-menu-btn" @click="mobileMenuOpen = !mobileMenuOpen">
@@ -24,6 +25,7 @@
         <RouterLink to="/works" class="nav-link" @click="mobileMenuOpen = false">作品集</RouterLink>
         <a href="https://blog.csdn.net/m0_54000398?type=blog" class="nav-link" target="_blank" rel="noopener" @click="mobileMenuOpen = false">博客</a>
         <RouterLink to="/about" class="nav-link" @click="mobileMenuOpen = false">关于</RouterLink>
+        <RouterLink to="/resume" class="nav-link" @click="mobileMenuOpen = false">简历</RouterLink>
         <RouterLink to="/contact" class="nav-link" @click="mobileMenuOpen = false">联系</RouterLink>
       </div>
     </header>
@@ -40,6 +42,7 @@
           <div class="footer-links">
             <a href="https://github.com/Resky0" target="_blank" rel="noopener">GitHub</a>
             <a href="mailto:Resky0818@163.com">邮箱</a>
+            <RouterLink to="/resume">简历</RouterLink>
           </div>
           <p class="footer-copyright">© 2026 个人作品集. 用 ❤️ 和代码构建</p>
           <a href="https://beian.miit.gov.cn/" target="_blank" class="footer-beian">鲁ICP备2026026679号</a>
