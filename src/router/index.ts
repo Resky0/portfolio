@@ -3,13 +3,15 @@ import type { RouteRecordRaw } from 'vue-router'
 import { getWorkBySlug } from '../data/works'
 
 const SITE_URL = 'https://resky.top'
-const DEFAULT_TITLE = ' Resky - AI 应用开发工程师'
+const DEFAULT_TITLE = 'Resky - AI 应用开发工程师'
 const DEFAULT_DESCRIPTION = 'Resky 的个人作品集，展示 AI 应用开发、Java 后端、Spring Boot、LangChain4j、Spring AI、RAG 与智能体项目实践。'
 
 interface SeoMeta {
   title?: string
   description?: string
 }
+
+type JsonLdNode = Record<string, unknown>
 
 const upsertMeta = (selector: string, createAttrs: Record<string, string>, content: string) => {
   let element = document.head.querySelector<HTMLMetaElement>(selector)
@@ -48,6 +50,96 @@ const applySeo = (title: string, description: string, url: string) => {
   setCanonical(url)
 }
 
+const toAbsoluteUrl = (url: string) => {
+  return url.startsWith('http') ? url : `${SITE_URL}${url}`
+}
+
+const applyJsonLd = (nodes: JsonLdNode[]) => {
+  let script = document.head.querySelector<HTMLScriptElement>('script[type="application/ld+json"][data-managed="route"]')
+
+  if (!script) {
+    script = document.createElement('script')
+    script.setAttribute('type', 'application/ld+json')
+    script.setAttribute('data-managed', 'route')
+    document.head.appendChild(script)
+  }
+
+  script.textContent = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@graph': nodes
+  })
+}
+
+const buildJsonLd = (title: string, description: string, url: string, routeName?: string | symbol | null, slug?: string): JsonLdNode[] => {
+  const person: JsonLdNode = {
+    '@type': 'Person',
+    '@id': `${SITE_URL}/#person`,
+    name: '曹敬昊',
+    alternateName: 'Resky',
+    jobTitle: 'AI 应用开发工程师',
+    url: SITE_URL,
+    email: 'mailto:Resky0818@163.com',
+    sameAs: [
+      'https://github.com/Resky0',
+      'https://blog.csdn.net/m0_54000398'
+    ],
+    knowsAbout: [
+      'Java',
+      'Spring Boot',
+      'Spring AI',
+      'LangChain4j',
+      'RAG',
+      'AI Agent',
+      'Redis',
+      'MySQL'
+    ]
+  }
+
+  const website: JsonLdNode = {
+    '@type': 'WebSite',
+    '@id': `${SITE_URL}/#website`,
+    name: 'Resky Portfolio',
+    url: SITE_URL,
+    inLanguage: 'zh-CN',
+    author: { '@id': `${SITE_URL}/#person` }
+  }
+
+  const page: JsonLdNode = {
+    '@type': routeName === 'Home' || routeName === 'About' ? 'ProfilePage' : 'WebPage',
+    '@id': `${url}#webpage`,
+    url,
+    name: title,
+    description,
+    inLanguage: 'zh-CN',
+    isPartOf: { '@id': `${SITE_URL}/#website` },
+    about: { '@id': `${SITE_URL}/#person` }
+  }
+
+  const graph = [person, website, page]
+
+  if (routeName === 'WorkDetail' && slug) {
+    const work = getWorkBySlug(slug)
+
+    if (work) {
+      graph.push({
+        '@type': 'SoftwareSourceCode',
+        '@id': `${url}#software`,
+        name: work.title,
+        description: work.description,
+        url,
+        image: toAbsoluteUrl(work.image),
+        codeRepository: work.github,
+        programmingLanguage: work.tags,
+        applicationCategory: 'AI Application',
+        author: { '@id': `${SITE_URL}/#person` },
+        keywords: work.tags.join(', ')
+      })
+    }
+  }
+
+  return graph
+}
+
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
@@ -64,7 +156,7 @@ const routes: RouteRecordRaw[] = [
     component: () => import('../pages/WorksPage.vue'),
     meta: {
       title: '项目作品 - Resky',
-      description: 'Resky的 AI 应用与 Java 后端项目作品集，包含 AI 项目生成器、旅游回忆册、PhotoMentor 等项目详情。'
+      description: 'Resky 的 AI 应用与 Java 后端项目作品集，包含 AI 项目生成器、旅游回忆册、PhotoMentor 等项目详情。'
     }
   },
   {
@@ -77,7 +169,7 @@ const routes: RouteRecordRaw[] = [
     name: 'About',
     component: () => import('../pages/AboutPage.vue'),
     meta: {
-      title: '关于Resky - AI 应用开发工程师',
+      title: '关于 Resky - AI 应用开发工程师',
       description: '了解 Resky 的技术背景、Java 后端能力、AI 应用开发经验、研究经历与求职方向。'
     }
   },
@@ -95,7 +187,7 @@ const routes: RouteRecordRaw[] = [
     name: 'Resume',
     component: () => import('../pages/ResumePage.vue'),
     meta: {
-      title: 'AI应用开发工程师- Resky 简历',
+      title: 'AI应用开发工程师-曹敬昊简历',
       description: '在线查看和下载 Resky 的 AI 应用开发工程师简历，了解 Java 后端、Spring Boot、Spring AI 与 RAG 项目经验。'
     }
   },
@@ -104,8 +196,17 @@ const routes: RouteRecordRaw[] = [
     name: 'Blog',
     component: () => import('../pages/BlogPage.vue'),
     meta: {
-      title: '技术博客 -  Resky',
+      title: '技术博客 - Resky',
       description: 'Resky 的技术博客入口，分享 Java 后端、AI 应用开发、Spring AI、LangChain4j 与项目实践。'
+    }
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    component: () => import('../pages/NotFoundPage.vue'),
+    meta: {
+      title: '页面不存在 - Resky',
+      description: '你访问的页面不存在，可以返回首页、作品集或简历页面继续了解 Resky。'
     }
   }
 ]
@@ -131,6 +232,7 @@ router.afterEach((to) => {
   }
 
   applySeo(title, description, `${SITE_URL}${to.path}`)
+  applyJsonLd(buildJsonLd(title, description, `${SITE_URL}${to.path}`, to.name, to.params.slug as string | undefined))
 })
 
 export default router

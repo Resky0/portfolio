@@ -1,3 +1,7 @@
+import aiCodeGenImage from '../assets/AICodeGenPhoto.png'
+import photoMentorImage from '../assets/PhotoMentor.png'
+import travelMemoryImage from '../assets/TravelMemory.png'
+
 export interface WorkChallenge {
   title: string
   solution: string
@@ -30,7 +34,7 @@ export const works: WorkProject[] = [
     description: '面向 AI 应用从需求到代码生成的工程化平台，核心围绕多阶段 AI 工作流编排与稳定性治理。',
     role: '独立开发 / 后端与 AI 工作流主导',
     tags: ['Spring Boot 3', 'LangChain4j', 'LangGraph4j', 'Redis', 'Redisson'],
-    image: 'https://raw.githubusercontent.com/Resky0/MdPicture/img/img/image-20260527202037798.png',
+    image: aiCodeGenImage,
     github: 'https://github.com/Resky0/AI-assisted-code-generation-platform',
     highlights: [
       '使用 LangChain4j 与 LangGraph4j 组织生成链路，拆分需求理解、代码生成、结果校验等阶段',
@@ -87,7 +91,7 @@ export const works: WorkProject[] = [
     description: '企业级图片素材与协同图库平台，围绕图片上传、空间管理、权限控制和实时协作构建完整业务闭环。',
     role: '独立开发 / 图片平台与协同能力实现',
     tags: ['Spring Boot', 'Redis', 'WebSocket', 'AI', 'COS'],
-    image: 'https://raw.githubusercontent.com/Resky0/MdPicture/img/img/image-20260528160757554.png',
+    image: travelMemoryImage,
     github: 'https://github.com/Resky0/picture',
     highlights: [
       '支持公共、私有与团队空间，覆盖个人素材管理和多人协同图库两类场景',
@@ -144,7 +148,7 @@ export const works: WorkProject[] = [
     description: 'AI 摄影辅助平台，面向摄影学习与作品改进场景，提供照片理解、评分反馈和拍摄建议。',
     role: '独立开发 / 多模态 AI 能力接入',
     tags: ['Spring Boot 3', 'Spring AI', 'Vue3'],
-    image: 'https://raw.githubusercontent.com/Resky0/MdPicture/img/img/image-20260528194221421.png',
+    image: photoMentorImage,
     github: 'https://github.com/Resky0/PictureMentor',
     highlights: [
       '集成通义千问多模态模型，实现照片智能评分、问题诊断与改进建议生成',
