@@ -35,43 +35,73 @@ const visibleHighlights = computed(() => props.work.highlights.slice(0, props.hi
 
 <style scoped>
 .work-card {
-  background: var(--bg-card);
-  border-radius: 16px;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(30, 41, 59, 0.94), rgba(15, 23, 42, 0.92));
+  border-radius: 12px;
   overflow: hidden;
-  border: 1px solid rgba(148, 163, 184, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid var(--border-soft);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .work-card:hover {
-  transform: translateY(-8px);
+  transform: translateY(-6px);
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  border-color: rgba(14, 165, 233, 0.36);
 }
 
 .work-image {
   position: relative;
   overflow: hidden;
   aspect-ratio: 16/10;
+  padding: 30px 10px 10px;
+  background: #0b1220;
+}
+
+.work-image::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 30px;
+  background: linear-gradient(180deg, #182033, #101827);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+}
+
+.work-image::after {
+  content: '';
+  position: absolute;
+  top: 11px;
+  left: 14px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ef4444;
+  box-shadow: 14px 0 #f59e0b, 28px 0 #22c55e;
 }
 
 .work-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid rgba(148, 163, 184, 0.12);
   transition: transform 0.5s ease;
 }
 
 .work-card:hover .work-image img {
-  transform: scale(1.1);
+  transform: scale(1.04);
 }
 
 .work-overlay {
   position: absolute;
-  inset: 0;
+  inset: 30px 10px 10px;
   background: linear-gradient(to top, rgba(15, 23, 42, 0.9), transparent);
   display: flex;
   align-items: flex-end;
   justify-content: center;
   padding: 1.5rem;
+  border-radius: 8px;
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -95,6 +125,9 @@ const visibleHighlights = computed(() => props.work.highlights.slice(0, props.hi
 
 .work-content {
   padding: 1.5rem;
+  display: flex;
+  min-height: 330px;
+  flex-direction: column;
 }
 
 .work-title {
@@ -108,6 +141,10 @@ const visibleHighlights = computed(() => props.work.highlights.slice(0, props.hi
   font-size: 0.9375rem;
   line-height: 1.6;
   margin-bottom: 1rem;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
 }
 
 .work-highlights {
@@ -141,6 +178,7 @@ const visibleHighlights = computed(() => props.work.highlights.slice(0, props.hi
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
+  margin-top: auto;
 }
 
 .tag {

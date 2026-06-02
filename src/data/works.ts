@@ -1,6 +1,6 @@
-import aiCodeGenImage from '../assets/AICodeGenPhoto.png'
-import photoMentorImage from '../assets/PhotoMentor.png'
-import travelMemoryImage from '../assets/TravelMemory.png'
+import aiCodeGenImage from '../assets/AICodeGenPhoto.webp'
+import photoMentorImage from '../assets/PhotoMentor.webp'
+import travelMemoryImage from '../assets/TravelMemory.webp'
 
 export interface WorkChallenge {
   title: string

@@ -139,7 +139,7 @@ const work = computed(() => getWorkBySlug(route.params.slug as string))
 }
 
 .project-hero {
-  padding: 4rem 0;
+  padding: 4rem 0 3rem;
 }
 
 .project-hero-grid {
@@ -189,7 +189,7 @@ const work = computed(() => getWorkBySlug(route.params.slug as string))
   overflow: hidden;
   margin-bottom: 1.5rem;
   background: rgba(148, 163, 184, 0.12);
-  border: 1px solid rgba(148, 163, 184, 0.12);
+  border: 1px solid var(--border-soft);
   border-radius: 12px;
 }
 
@@ -236,11 +236,36 @@ const work = computed(() => getWorkBySlug(route.params.slug as string))
 }
 
 .project-cover {
-  background: var(--bg-card);
-  border: 1px solid rgba(148, 163, 184, 0.1);
-  border-radius: 16px;
+  position: relative;
+  padding: 34px 12px 12px;
+  background: #0b1220;
+  border: 1px solid var(--border-soft);
+  border-radius: 14px;
   overflow: hidden;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.24);
+}
+
+.project-cover::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 34px;
+  background: linear-gradient(180deg, #182033, #101827);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+}
+
+.project-cover::after {
+  content: '';
+  position: absolute;
+  top: 12px;
+  left: 16px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ef4444;
+  box-shadow: 14px 0 #f59e0b, 28px 0 #22c55e;
 }
 
 .project-cover img {
@@ -248,6 +273,8 @@ const work = computed(() => getWorkBySlug(route.params.slug as string))
   display: block;
   aspect-ratio: 16/9;
   object-fit: cover;
+  border: 1px solid rgba(148, 163, 184, 0.12);
+  border-radius: 8px;
 }
 
 .project-section {
@@ -263,16 +290,14 @@ const work = computed(() => getWorkBySlug(route.params.slug as string))
 
 .detail-main {
   display: grid;
-  gap: 2rem;
+  gap: 1.25rem;
 }
 
 .content-block {
-  padding-bottom: 2rem;
-  border-bottom: 1px solid rgba(148, 163, 184, 0.12);
-}
-
-.content-block:last-child {
-  border-bottom: 0;
+  padding: 1.5rem;
+  background: rgba(30, 41, 59, 0.62);
+  border: 1px solid var(--border-soft);
+  border-radius: 12px;
 }
 
 .content-block h2 {
@@ -320,9 +345,9 @@ const work = computed(() => getWorkBySlug(route.params.slug as string))
 .feature-item,
 .challenge-item,
 .summary-panel {
-  background: var(--bg-card);
-  border: 1px solid rgba(148, 163, 184, 0.1);
-  border-radius: 12px;
+  background: rgba(15, 23, 42, 0.42);
+  border: 1px solid var(--border-soft);
+  border-radius: 10px;
 }
 
 .feature-item {
@@ -342,6 +367,7 @@ const work = computed(() => getWorkBySlug(route.params.slug as string))
   grid-template-columns: minmax(160px, 0.38fr) minmax(0, 1fr);
   gap: 1.25rem;
   align-items: start;
+  border-left: 3px solid rgba(14, 165, 233, 0.6);
 }
 
 .challenge-item span {
@@ -365,6 +391,7 @@ const work = computed(() => getWorkBySlug(route.params.slug as string))
 
 .summary-panel {
   padding: 1.25rem;
+  background: rgba(30, 41, 59, 0.78);
 }
 
 .summary-label {

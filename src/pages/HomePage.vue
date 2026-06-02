@@ -49,27 +49,40 @@
           </div>
         </div>
         <div class="hero-visual animate-fade-in-up" style="animation-delay: 0.2s">
-          <div class="code-window">
-            <div class="code-window-header">
-              <span class="dot dot-red"></span>
-              <span class="dot dot-yellow"></span>
-              <span class="dot dot-green"></span>
-              <span class="code-window-title">developer.ts</span>
+          <div class="career-panel">
+            <div class="career-panel-header">
+              <span class="career-panel-kicker">Open To Work</span>
+              <span class="career-panel-status">求职中</span>
             </div>
-            <div class="code-window-content">
-              <pre><code><span class="code-keyword">const</span> <span class="code-variable">developer</span> = {
-  <span class="code-property">name</span>: <span class="code-string">'Resky'</span>,
-  <span class="code-property">skills</span>: [
-    <span class="code-string">'Java'</span>, <span class="code-string">'SpringBoot'</span>,
-    <span class="code-string">'MySQL'</span>, <span class="code-string">'Redis'</span>,
-    <span class="code-string">'LangChain4j'</span>, <span class="code-string">'RAG'</span>
-  ],
-  <span class="code-property">passion</span>: <span class="code-string">'AI 全栈开发'</span>,
-  <span class="code-property">target</span>: <span class="code-string">'AI 应用开发 / Java 后端'</span>,
-  <span class="code-property">status</span>: <span class="code-string">'求职中'</span>
-}
-
-<span class="code-comment">// 正在构建智能应用...</span></code></pre>
+            <div class="career-panel-main">
+              <h2>AI 应用开发 / Java 后端</h2>
+              <p>用 Spring Boot 的工程化能力承接大模型应用，把 RAG、智能体和多模态能力落进真实业务流程。</p>
+            </div>
+            <div class="career-panel-grid">
+              <div>
+                <span>学历</span>
+                <strong>27届硕士</strong>
+              </div>
+              <div>
+                <span>项目</span>
+                <strong>3+ AI 实践</strong>
+              </div>
+              <div>
+                <span>主栈</span>
+                <strong>Spring Boot</strong>
+              </div>
+              <div>
+                <span>AI</span>
+                <strong>RAG / Agent</strong>
+              </div>
+            </div>
+            <div class="career-panel-stack">
+              <span>Java</span>
+              <span>Redis</span>
+              <span>MySQL</span>
+              <span>LangChain4j</span>
+              <span>Spring AI</span>
+              <span>Vue 3</span>
             </div>
           </div>
         </div>
@@ -120,20 +133,23 @@ const featuredWorks = works.slice(0, 3)
   align-items: center;
   position: relative;
   overflow: hidden;
-  padding: 4rem 0;
+  padding: 4.5rem 0;
 }
 
 .hero-bg {
   position: absolute;
   inset: 0;
   overflow: hidden;
+  background:
+    linear-gradient(rgba(148, 163, 184, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.05) 1px, transparent 1px),
+    linear-gradient(135deg, rgba(14, 165, 233, 0.1), rgba(139, 92, 246, 0.04) 42%, transparent 72%);
+  background-size: 44px 44px, 44px 44px, auto;
+  mask-image: linear-gradient(to bottom, #000 0%, rgba(0, 0, 0, 0.72) 55%, transparent 100%);
 }
 
 .hero-orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.5;
+  display: none;
 }
 
 .hero-orb-1 {
@@ -204,14 +220,8 @@ const featuredWorks = works.slice(0, 3)
   font-size: 0.875rem;
   font-weight: 600;
   color: #fff;
-  background: linear-gradient(135deg, #ef4444, #f97316);
+  background: linear-gradient(135deg, var(--success), #14b8a6);
   border-radius: 999px;
-  animation: pulse-badge 2s ease-in-out infinite;
-}
-
-@keyframes pulse-badge {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
 }
 
 .hero-description {
@@ -261,7 +271,7 @@ const featuredWorks = works.slice(0, 3)
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--accent);
+  background: var(--success);
 }
 
 .hero-actions {
@@ -273,12 +283,17 @@ const featuredWorks = works.slice(0, 3)
 
 .hero-stats {
   display: flex;
-  gap: 3rem;
+  gap: 1rem;
 }
 
 .stat {
   display: flex;
   flex-direction: column;
+  min-width: 128px;
+  padding: 0.85rem 1rem;
+  background: rgba(15, 23, 42, 0.36);
+  border: 1px solid var(--border-soft);
+  border-radius: 10px;
 }
 
 .stat-number {
@@ -296,53 +311,103 @@ const featuredWorks = works.slice(0, 3)
   justify-content: center;
 }
 
-.code-window {
-  background: var(--bg-card);
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid rgba(148, 163, 184, 0.1);
+.career-panel {
+  width: 100%;
+  max-width: 520px;
+  background:
+    linear-gradient(180deg, rgba(30, 41, 59, 0.94), rgba(15, 23, 42, 0.94)),
+    var(--bg-card);
+  border-radius: 14px;
+  border: 1px solid var(--border-soft);
+  padding: 1.5rem;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
 }
 
-.code-window-header {
+.career-panel-header {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 8px;
-  padding: 12px 16px;
-  background: rgba(0, 0, 0, 0.2);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
 }
 
-.dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
+.career-panel-kicker {
+  color: var(--primary);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
-.dot-red { background: #ef4444; }
-.dot-yellow { background: #eab308; }
-.dot-green { background: #22c55e; }
+.career-panel-status {
+  padding: 0.3rem 0.65rem;
+  color: #fff;
+  background: linear-gradient(135deg, var(--success), #14b8a6);
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
 
-.code-window-title {
-  margin-left: 8px;
-  font-size: 0.875rem;
+.career-panel-main {
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+  margin-bottom: 1.5rem;
+}
+
+.career-panel-main h2 {
+  font-size: 1.8rem;
+  line-height: 1.25;
+  margin-bottom: 0.75rem;
+}
+
+.career-panel-main p {
   color: var(--text-secondary);
+  line-height: 1.75;
 }
 
-.code-window-content {
-  padding: 1.5rem;
-  font-family: 'Fira Code', 'JetBrains Mono', monospace;
-  font-size: 0.875rem;
-  line-height: 1.8;
+.career-panel-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
 }
 
-.code-keyword { color: #c678dd; }
-.code-variable { color: #e06c75; }
-.code-property { color: #e5c07b; }
-.code-string { color: #98c379; }
-.code-comment { color: #5c6370; font-style: italic; }
+.career-panel-grid div {
+  padding: 1rem;
+  background: rgba(15, 23, 42, 0.48);
+  border: 1px solid rgba(148, 163, 184, 0.1);
+  border-radius: 8px;
+}
+
+.career-panel-grid span {
+  display: block;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  margin-bottom: 0.35rem;
+}
+
+.career-panel-grid strong {
+  font-size: 1rem;
+}
+
+.career-panel-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.career-panel-stack span {
+  padding: 0.35rem 0.7rem;
+  color: var(--primary);
+  background: rgba(14, 165, 233, 0.1);
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
 
 .featured-works {
   padding: 6rem 0;
+  background: rgba(15, 23, 42, 0.34);
 }
 
 .works-grid {
@@ -363,9 +428,11 @@ const featuredWorks = works.slice(0, 3)
 .cta-content {
   text-align: center;
   padding: 4rem;
-  background: var(--bg-card);
-  border-radius: 24px;
-  border: 1px solid rgba(148, 163, 184, 0.1);
+  background:
+    linear-gradient(135deg, rgba(14, 165, 233, 0.14), rgba(139, 92, 246, 0.1)),
+    var(--bg-card-soft);
+  border-radius: 14px;
+  border: 1px solid var(--border-soft);
 }
 
 .cta-title {
@@ -412,6 +479,7 @@ const featuredWorks = works.slice(0, 3)
 
   .hero-stats {
     justify-content: center;
+    flex-wrap: wrap;
   }
 }
 
@@ -429,8 +497,28 @@ const featuredWorks = works.slice(0, 3)
     align-items: stretch;
   }
 
+  .hero-stats {
+    gap: 0.75rem;
+  }
+
+  .stat {
+    flex: 1 1 100%;
+  }
+
+  .career-panel {
+    padding: 1rem;
+  }
+
+  .career-panel-grid {
+    grid-template-columns: 1fr;
+  }
+
   .works-grid {
     grid-template-columns: 1fr;
+  }
+
+  .cta-content {
+    padding: 2rem 1.25rem;
   }
 }
 </style>

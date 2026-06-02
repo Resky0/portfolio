@@ -23,6 +23,13 @@
     <section class="resume-viewer-section">
       <div class="container">
         <div class="resume-viewer">
+          <div class="resume-toolbar">
+            <span>AI应用开发工程师-曹敬昊.pdf</span>
+            <div class="resume-toolbar-actions">
+              <a :href="resumeUrl" download="AI应用开发工程师-曹敬昊.pdf">下载</a>
+              <a :href="resumeUrl" target="_blank" rel="noopener">新窗口</a>
+            </div>
+          </div>
           <object :data="resumeUrl" type="application/pdf" class="resume-frame">
             <div class="resume-fallback">
               <h2>当前浏览器无法直接预览 PDF</h2>
@@ -50,6 +57,7 @@ const resumeUrl = '/resume-cao-jinghao-ai-engineer.pdf'
 
 .resume-header {
   padding: 4rem 0 2rem;
+  background: linear-gradient(180deg, rgba(14, 165, 233, 0.08), transparent);
 }
 
 .resume-header-inner {
@@ -101,6 +109,7 @@ const resumeUrl = '/resume-cao-jinghao-ai-engineer.pdf'
   gap: 1rem;
   align-items: center;
   padding-bottom: 0.25rem;
+  flex-wrap: wrap;
 }
 
 .resume-viewer-section {
@@ -110,16 +119,59 @@ const resumeUrl = '/resume-cao-jinghao-ai-engineer.pdf'
 .resume-viewer {
   height: calc(100vh - 220px);
   min-height: 680px;
-  background: var(--bg-card);
-  border: 1px solid rgba(148, 163, 184, 0.1);
-  border-radius: 16px;
+  background: var(--bg-card-soft);
+  border: 1px solid var(--border-soft);
+  border-radius: 14px;
   overflow: hidden;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.24);
 }
 
+.resume-toolbar {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0 1rem;
+  background: linear-gradient(180deg, #182033, #101827);
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.resume-toolbar span {
+  min-width: 0;
+  overflow: hidden;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.resume-toolbar-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.resume-toolbar-actions a {
+  padding: 0.4rem 0.7rem;
+  color: var(--text-primary);
+  background: rgba(14, 165, 233, 0.12);
+  border: 1px solid rgba(14, 165, 233, 0.22);
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.resume-toolbar-actions a:hover {
+  background: rgba(14, 165, 233, 0.2);
+  border-color: rgba(14, 165, 233, 0.46);
+}
+
 .resume-frame {
   width: 100%;
-  height: 100%;
+  height: calc(100% - 56px);
   border: 0;
   display: block;
   background: #111827;
@@ -178,6 +230,10 @@ const resumeUrl = '/resume-cao-jinghao-ai-engineer.pdf'
     height: 70vh;
     min-height: 520px;
     border-radius: 12px;
+  }
+
+  .resume-toolbar {
+    padding: 0 0.75rem;
   }
 }
 </style>

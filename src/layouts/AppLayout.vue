@@ -3,8 +3,8 @@
     <header class="header">
       <div class="container header-inner">
         <RouterLink to="/" class="logo">
-          <span class="logo-icon">⚡</span>
-          <span class="gradient-text">Portfolio</span>
+          <span class="logo-mark">R</span>
+          <span class="gradient-text">Resky</span>
         </RouterLink>
         <nav class="nav">
           <RouterLink to="/" class="nav-link" :class="{ active: route.path === '/' }">首页</RouterLink>
@@ -36,8 +36,8 @@
       <div class="container">
         <div class="footer-content">
           <div class="footer-brand">
-            <span class="logo-icon">⚡</span>
-            <span>Portfolio</span>
+            <span class="logo-mark">R</span>
+            <span>Resky</span>
           </div>
           <div class="footer-links">
             <a href="https://github.com/Resky0" target="_blank" rel="noopener">GitHub</a>
@@ -89,16 +89,32 @@ watch(() => route.path, () => {
   height: 72px;
 }
 
-.logo {
+.logo,
+.footer-brand {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.65rem;
+}
+
+.logo {
   font-size: 1.5rem;
   font-weight: 700;
 }
 
-.logo-icon {
-  font-size: 1.75rem;
+.logo-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  color: #fff;
+  background:
+    linear-gradient(135deg, rgba(14, 165, 233, 0.9), rgba(139, 92, 246, 0.86));
+  border: 1px solid rgba(248, 250, 252, 0.16);
+  border-radius: 10px;
+  font-size: 0.98rem;
+  font-weight: 800;
+  box-shadow: 0 8px 24px rgba(14, 165, 233, 0.22);
 }
 
 .nav {
@@ -180,10 +196,7 @@ watch(() => route.path, () => {
 }
 
 .footer-brand {
-  display: flex;
-  align-items: center;
   justify-content: center;
-  gap: 0.5rem;
   font-size: 1.25rem;
   font-weight: 700;
   margin-bottom: 1rem;
