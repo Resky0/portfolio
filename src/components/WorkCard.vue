@@ -3,7 +3,7 @@
     <div class="work-image">
       <img :src="work.image" :alt="work.title" />
       <div class="work-overlay">
-        <a :href="work.link" target="_blank" rel="noopener" class="work-link">查看项目 →</a>
+        <RouterLink :to="{ name: 'WorkDetail', params: { slug: work.slug } }" class="work-link">查看详情 →</RouterLink>
       </div>
     </div>
     <div class="work-content">
@@ -20,16 +20,10 @@
 </template>
 
 <script setup lang="ts">
+import type { WorkProject } from '../data/works'
+
 defineProps<{
-  work: {
-    id: number
-    title: string
-    description: string
-    highlights?: string[]
-    tags: string[]
-    image: string
-    link: string
-  }
+  work: WorkProject
 }>()
 </script>
 

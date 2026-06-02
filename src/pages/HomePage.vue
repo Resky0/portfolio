@@ -13,14 +13,24 @@
             <span class="gradient-text">Resky</span>
             <span class="job-badge">求职中</span>
           </h1>
-          <p class="hero-status">27届应届硕士 · 期待机会</p>
+          <p class="hero-status">27届应届硕士 · 求职 AI 应用开发 / Java 后端</p>
           <p class="hero-description">
-            AI 全栈开发工程师，27届硕士在读，专注于 Java 后端与 AI 应用开发。热衷于用 LangChain4j 和 Spring AI
-            构建 RAG 知识库与 AI 智能体，让技术创造实际价值。
+            专注 Spring Boot 后端工程与 AI 应用落地，熟悉 LangChain4j、Spring AI、RAG 知识库和智能体工作流，
+            能把大模型能力接入真实业务流程。
           </p>
+          <div class="hero-focus">
+            <span>AI 应用开发</span>
+            <span>Java 后端</span>
+            <span>RAG / 智能体</span>
+          </div>
+          <ul class="hero-proof">
+            <li>独立完成 AI 工作流、图片协同平台、多模态摄影助手等项目</li>
+            <li>具备缓存、限流、异步处理、对象存储等后端工程化实践</li>
+            <li>材料科学与深度学习交叉背景，适合垂直领域 AI 应用落地</li>
+          </ul>
           <div class="hero-actions">
-            <RouterLink to="/works" class="btn-primary">查看作品</RouterLink>
-            <RouterLink to="/resume" class="btn-secondary">查看简历</RouterLink>
+            <RouterLink to="/resume" class="btn-primary">查看简历</RouterLink>
+            <RouterLink to="/works" class="btn-secondary">查看作品</RouterLink>
             <RouterLink to="/contact" class="btn-secondary">联系我</RouterLink>
           </div>
           <div class="hero-stats">
@@ -55,7 +65,8 @@
     <span class="code-string">'LangChain4j'</span>, <span class="code-string">'RAG'</span>
   ],
   <span class="code-property">passion</span>: <span class="code-string">'AI 全栈开发'</span>,
-  <span class="code-property">status</span>: <span class="code-string">'27届硕士'</span>
+  <span class="code-property">target</span>: <span class="code-string">'AI 应用开发 / Java 后端'</span>,
+  <span class="code-property">status</span>: <span class="code-string">'求职中'</span>
 }
 
 <span class="code-comment">// 正在构建智能应用...</span></code></pre>
@@ -96,48 +107,9 @@
 
 <script setup lang="ts">
 import WorkCard from '../components/WorkCard.vue'
+import { works } from '../data/works'
 
-const featuredWorks = [
-  {
-    id: 1,
-    title: 'AI 项目生成器',
-    description: '面向 AI 应用从需求到代码生成的工程化平台，核心围绕多阶段 AI 工作流编排与稳定性治理。',
-    highlights: [
-      '使用 LangChain4j 与 LangGraph4j 组织生成链路，拆分需求理解、代码生成、结果校验等阶段',
-      '引入多级缓存、分布式限流、异步处理与护轨重试，提升高并发场景下的可用性',
-      '沉淀 Spring Boot 3 + Redis + Redisson 的后端工程实践，可作为 AI 应用平台脚手架'
-    ],
-    tags: ['Spring Boot 3', 'LangChain4j', 'LangGraph4j', 'Redis', 'Redisson'],
-    image: 'https://raw.githubusercontent.com/Resky0/MdPicture/img/img/image-20260527202037798.png',
-    link: 'https://github.com/Resky0/AI-assisted-code-generation-platform'
-  },
-  {
-    id: 2,
-    title: '旅游回忆册',
-    description: '企业级图片素材与协同图库平台，围绕图片上传、空间管理、权限控制和实时协作构建完整业务闭环。',
-    highlights: [
-      '支持公共、私有与团队空间，覆盖个人素材管理和多人协同图库两类场景',
-      '接入 COS 对象存储与 Redis 缓存，优化图片资源管理、访问速度和系统扩展性',
-      '结合 AI 与 WebSocket 能力，增强素材处理体验和团队协同反馈效率'
-    ],
-    tags: ['Spring Boot', 'Redis', 'WebSocket', 'AI', 'COS'],
-    image: 'https://raw.githubusercontent.com/Resky0/MdPicture/img/img/image-20260528160757554.png',
-    link: 'https://github.com/Resky0/picture'
-  },
-  {
-    id: 3,
-    title: 'PhotoMentor',
-    description: 'AI 摄影辅助平台，面向摄影学习与作品改进场景，提供照片理解、评分反馈和拍摄建议。',
-    highlights: [
-      '集成通义千问多模态模型，实现照片智能评分、问题诊断与改进建议生成',
-      '前后端采用 Vue 3 + Spring Boot 3 分层实现，兼顾交互体验与服务端扩展',
-      '面向多端设备适配实时拍摄指导流程，让 AI 建议更贴近实际拍摄场景'
-    ],
-    tags: ['Spring Boot 3', 'Spring AI', 'Vue3'],
-    image: 'https://raw.githubusercontent.com/Resky0/MdPicture/img/img/image-20260528194221421.png',
-    link: 'https://github.com/Resky0/PictureMentor'
-  }
-]
+const featuredWorks = works.slice(0, 3)
 </script>
 
 <style scoped>
@@ -245,11 +217,55 @@ const featuredWorks = [
   font-size: 1.25rem;
   color: var(--text-secondary);
   line-height: 1.8;
-  margin-bottom: 2rem;
+  margin-bottom: 1.25rem;
+}
+
+.hero-focus {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.hero-focus span {
+  padding: 0.45rem 0.8rem;
+  color: var(--text-primary);
+  background: rgba(14, 165, 233, 0.1);
+  border: 1px solid rgba(14, 165, 233, 0.22);
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.hero-proof {
+  display: grid;
+  gap: 0.625rem;
+  margin: 0 0 2rem;
+  padding: 0;
+  list-style: none;
+}
+
+.hero-proof li {
+  position: relative;
+  padding-left: 1.1rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+.hero-proof li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.75em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
 }
 
 .hero-actions {
   display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
   margin-bottom: 3rem;
 }
@@ -382,6 +398,17 @@ const featuredWorks = [
     justify-content: center;
   }
 
+  .hero-focus {
+    justify-content: center;
+  }
+
+  .hero-proof {
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+  }
+
   .hero-stats {
     justify-content: center;
   }
@@ -394,6 +421,11 @@ const featuredWorks = [
 
   .hero-title {
     font-size: 2.5rem;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
   }
 
   .works-grid {
