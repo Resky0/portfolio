@@ -1,7 +1,7 @@
 <template>
   <div class="work-card">
     <div class="work-image">
-      <img :src="work.image" :alt="work.title" />
+      <img :src="work.image" :alt="`${work.title} 项目截图 - ${work.tags.slice(0, 3).join(' / ')}`" />
       <div class="work-overlay">
         <RouterLink :to="{ name: 'WorkDetail', params: { slug: work.slug } }" class="work-link">查看详情 →</RouterLink>
       </div>

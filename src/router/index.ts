@@ -5,10 +5,25 @@ import { getWorkBySlug } from '../data/works'
 const SITE_URL = 'https://resky.top'
 const DEFAULT_TITLE = 'Resky - AI 应用开发工程师'
 const DEFAULT_DESCRIPTION = 'Resky 的个人作品集，展示 AI 应用开发、Java 后端、Spring Boot、LangChain4j、Spring AI、RAG 与智能体项目实践。'
+const DEFAULT_IMAGE = `${SITE_URL}/logo.jpg`
+const DEFAULT_KEYWORDS = [
+  'Resky',
+  '曹敬昊',
+  'AI 应用开发工程师',
+  'Java 后端',
+  'Spring Boot',
+  'Spring AI',
+  'LangChain4j',
+  'RAG',
+  '智能体',
+  '个人作品集'
+]
 
 interface SeoMeta {
   title?: string
   description?: string
+  keywords?: string[]
+  image?: string
 }
 
 type JsonLdNode = Record<string, unknown>
@@ -37,16 +52,27 @@ const setCanonical = (url: string) => {
   link.setAttribute('href', url)
 }
 
-const applySeo = (title: string, description: string, url: string) => {
+const applySeo = (
+  title: string,
+  description: string,
+  url: string,
+  keywords: string[] = DEFAULT_KEYWORDS,
+  image: string = DEFAULT_IMAGE
+) => {
   document.title = title
   upsertMeta('meta[name="description"]', { name: 'description' }, description)
+  upsertMeta('meta[name="keywords"]', { name: 'keywords' }, keywords.join(', '))
+  upsertMeta('meta[name="robots"]', { name: 'robots' }, 'index,follow')
   upsertMeta('meta[property="og:title"]', { property: 'og:title' }, title)
   upsertMeta('meta[property="og:description"]', { property: 'og:description' }, description)
   upsertMeta('meta[property="og:url"]', { property: 'og:url' }, url)
   upsertMeta('meta[property="og:type"]', { property: 'og:type' }, 'website')
+  upsertMeta('meta[property="og:site_name"]', { property: 'og:site_name' }, 'Resky Portfolio')
+  upsertMeta('meta[property="og:image"]', { property: 'og:image' }, image)
   upsertMeta('meta[name="twitter:card"]', { name: 'twitter:card' }, 'summary_large_image')
   upsertMeta('meta[name="twitter:title"]', { name: 'twitter:title' }, title)
   upsertMeta('meta[name="twitter:description"]', { name: 'twitter:description' }, description)
+  upsertMeta('meta[name="twitter:image"]', { name: 'twitter:image' }, image)
   setCanonical(url)
 }
 
@@ -68,6 +94,45 @@ const applyJsonLd = (nodes: JsonLdNode[]) => {
     '@context': 'https://schema.org',
     '@graph': nodes
   })
+}
+
+const buildBreadcrumbs = (routeName: string | symbol | null | undefined, title: string, url: string): JsonLdNode => {
+  const items = [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: '首页',
+      item: SITE_URL
+    }
+  ]
+
+  if (routeName === 'WorkDetail') {
+    items.push({
+      '@type': 'ListItem',
+      position: 2,
+      name: '项目作品',
+      item: `${SITE_URL}/works`
+    })
+    items.push({
+      '@type': 'ListItem',
+      position: 3,
+      name: title.replace(' - 项目详情', ''),
+      item: url
+    })
+  } else if (routeName !== 'Home') {
+    items.push({
+      '@type': 'ListItem',
+      position: 2,
+      name: title.replace(' - Resky', ''),
+      item: url
+    })
+  }
+
+  return {
+    '@type': 'BreadcrumbList',
+    '@id': `${url}#breadcrumb`,
+    itemListElement: items
+  }
 }
 
 const buildJsonLd = (title: string, description: string, url: string, routeName?: string | symbol | null, slug?: string): JsonLdNode[] => {
@@ -115,7 +180,7 @@ const buildJsonLd = (title: string, description: string, url: string, routeName?
     about: { '@id': `${SITE_URL}/#person` }
   }
 
-  const graph = [person, website, page]
+  const graph = [person, website, page, buildBreadcrumbs(routeName, title, url)]
 
   if (routeName === 'WorkDetail' && slug) {
     const work = getWorkBySlug(slug)
@@ -222,6 +287,8 @@ const router = createRouter({
 router.afterEach((to) => {
   let title = (to.meta as SeoMeta).title || DEFAULT_TITLE
   let description = (to.meta as SeoMeta).description || DEFAULT_DESCRIPTION
+  let keywords = (to.meta as SeoMeta).keywords || DEFAULT_KEYWORDS
+  let image = toAbsoluteUrl((to.meta as SeoMeta).image || DEFAULT_IMAGE)
 
   if (to.name === 'WorkDetail') {
     const work = getWorkBySlug(to.params.slug as string)
@@ -229,9 +296,11 @@ router.afterEach((to) => {
     description = work
       ? `${work.title}项目详情：${work.description} 技术栈包括 ${work.tags.join('、')}。`
       : '项目详情不存在，请返回作品集查看 Resky 的 AI 应用与 Java 后端项目。'
+    keywords = work ? [...DEFAULT_KEYWORDS, work.title, ...work.tags] : DEFAULT_KEYWORDS
+    image = work ? toAbsoluteUrl(work.image) : DEFAULT_IMAGE
   }
 
-  applySeo(title, description, `${SITE_URL}${to.path}`)
+  applySeo(title, description, `${SITE_URL}${to.path}`, keywords, image)
   applyJsonLd(buildJsonLd(title, description, `${SITE_URL}${to.path}`, to.name, to.params.slug as string | undefined))
 })
 

@@ -12,7 +12,7 @@
         <div class="about-grid">
           <div class="about-image">
             <div class="image-wrapper">
-              <img src="/src/assets/photo.png" alt="头像" />
+              <img src="/src/assets/photo.png" alt="曹敬昊 Resky AI 应用开发工程师头像" />
               <div class="image-decoration"></div>
             </div>
           </div>

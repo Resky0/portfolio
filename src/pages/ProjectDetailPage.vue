@@ -31,7 +31,7 @@
             </div>
           </div>
           <div class="project-cover">
-            <img :src="work.image" :alt="work.title" />
+            <img :src="work.image" :alt="`${work.title} 项目界面截图`" />
           </div>
         </div>
       </section>
